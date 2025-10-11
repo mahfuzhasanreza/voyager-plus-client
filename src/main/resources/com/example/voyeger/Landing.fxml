@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+
+<StackPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.example.voyeger.LandingController"
+           stylesheets="@Landing.css"
+           styleClass="landing-root">
+
+    <StackPane styleClass="bg-overlay">
+        <VBox alignment="CENTER" spacing="30" styleClass="content-container">
+
+            <!-- Logo/Brand Section -->
+            <VBox alignment="CENTER" spacing="10">
+                <Label text="✈" styleClass="logo-icon"/>
+                <Label text="Voyager+" styleClass="brand-title"/>
+                <Label text="Your Journey Begins Here" styleClass="brand-subtitle"/>
+            </VBox>
+
+            <!-- Tagline -->
+            <Label text="Explore • Connect • Travel Together" styleClass="tagline"/>
+
+            <!-- Action Buttons -->
+            <VBox alignment="CENTER" spacing="15" maxWidth="350">
+                <Button text="Get Started" styleClass="btn-primary" maxWidth="Infinity"
+                        onAction="#handleGetStarted"/>
+                <Button text="Sign In" styleClass="btn-secondary" maxWidth="Infinity"
+                        onAction="#handleSignIn"/>
+            </VBox>
+
+            <!-- Features Preview -->
+            <HBox alignment="CENTER" spacing="40" styleClass="features-row">
+                <VBox alignment="CENTER" spacing="8" styleClass="feature-item">
+                    <Label text="🗺" styleClass="feature-icon"/>
+                    <Label text="Plan Trips" styleClass="feature-text"/>
+                </VBox>
+                <VBox alignment="CENTER" spacing="8" styleClass="feature-item">
+                    <Label text="👥" styleClass="feature-icon"/>
+                    <Label text="Join Groups" styleClass="feature-text"/>
+                </VBox>
+                <VBox alignment="CENTER" spacing="8" styleClass="feature-item">
+                    <Label text="🏨" styleClass="feature-icon"/>
+                    <Label text="Book Hotels" styleClass="feature-text"/>
+                </VBox>
+                <VBox alignment="CENTER" spacing="8" styleClass="feature-item">
+                    <Label text="💬" styleClass="feature-icon"/>
+                    <Label text="Chat Live" styleClass="feature-text"/>
+                </VBox>
+            </HBox>
+
+            <!-- Footer -->
+            <Label text="Team ByteVoyagers © 2025" styleClass="footer-text"/>
+
+        </VBox>
+    </StackPane>
+
+</StackPane>

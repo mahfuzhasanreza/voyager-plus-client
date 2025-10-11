@@ -8,9 +8,9 @@ import javafx.stage.Stage;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("TripPlanner.fxml"));
-        Scene scene = new Scene(loader.load());
-        stage.setTitle("Voyager+ Trip Planner");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Landing.fxml"));
+        Scene scene = new Scene(loader.load(), 1200, 800);
+        stage.setTitle("Voyager+ - Travel Together");
         stage.setScene(scene);
         stage.show();
     }
