@@ -1,24 +1,21 @@
 package com.example.voyeger;
 
-// Main.java
 import javafx.application.Application;
-import javafx.scene.Parent;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        TripPlannerController controller = new TripPlannerController(); // our controller builds UI
-        Parent root = controller.loadUI();
-
-        Scene scene = new Scene(root, 900, 600);
-        stage.setTitle("Voyager+ — Travel & Tourism (Demo)");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("TripPlanner.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setTitle("Voyager+ Trip Planner");
         stage.setScene(scene);
         stage.show();
     }
 
     public static void main(String[] args) {
-        launch(args);
+        launch();
     }
 }

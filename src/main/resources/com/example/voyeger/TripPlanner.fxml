@@ -1,16 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.voyeger.TripPlannerController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.voyeger.TripPlannerController"
+            stylesheets="@TripPlanner.css"
+            prefWidth="600" prefHeight="400">
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+    <VBox alignment="CENTER" spacing="10" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20"
+          AnchorPane.topAnchor="20" AnchorPane.bottomAnchor="20">
+
+        <Label text="✈ Voyager+ Trip Planner" styleClass="header-label"/>
+
+        <TextField fx:id="titleField" promptText="Enter trip title"/>
+        <DatePicker fx:id="datePicker" promptText="Select trip date"/>
+        <TextField fx:id="routeField" promptText="Enter travel route"/>
+        <TextField fx:id="budgetField" promptText="Enter budget"/>
+        <TextArea fx:id="descriptionArea" promptText="Enter trip description"/>
+
+        <HBox spacing="10">
+            <RadioButton fx:id="soloTripRadio" text="Solo Trip" toggleGroup="$tripTypeGroup" selected="true"/>
+            <RadioButton fx:id="groupTripRadio" text="Group Trip" toggleGroup="$tripTypeGroup"/>
+        </HBox>
+
+        <Button text="Create Trip" onAction="#handleCreateTrip" styleClass="primary-btn"/>
+
+        <Label fx:id="statusLabel" textFill="green"/>
+
+    </VBox>
+</AnchorPane>
