@@ -451,6 +451,8 @@ public class NewsFeedController {
             Stage stage = (Stage) feedContainer.getScene().getWindow();
             stage.setScene(new Scene(root, 1400, 800));
             stage.setTitle(title);
+            stage.setResizable(true);
+            stage.setMaximized(true);
 
         } catch (Exception e) {
             System.err.println("Failed to load page: " + fxmlFile);

@@ -223,6 +223,8 @@ public class NavbarController {
                     Stage stage = (Stage) navbarContainer.getScene().getWindow();
                     stage.setScene(new Scene(root, 1400, 800));
                     stage.setTitle("Voyager+ - Welcome");
+                    stage.setResizable(true);
+                    stage.setMaximized(true);
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -248,4 +250,3 @@ public class NavbarController {
         updateNotificationBadge();
     }
 }
-

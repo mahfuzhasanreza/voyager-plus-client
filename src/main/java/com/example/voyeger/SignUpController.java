@@ -134,6 +134,8 @@ public class SignUpController {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.setTitle("Voyager+ - Welcome");
+            stage.setResizable(true);
+            stage.setMaximized(true);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -148,6 +150,8 @@ public class SignUpController {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.setTitle("Voyager+ - Sign In");
+            stage.setResizable(true);
+            stage.setMaximized(true);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -164,4 +168,3 @@ public class SignUpController {
         statusLabel.setStyle("-fx-text-fill: #27ae60; -fx-font-size: 14px; -fx-font-weight: bold;");
     }
 }
-

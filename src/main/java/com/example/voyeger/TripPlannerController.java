@@ -158,6 +158,8 @@ public class TripPlannerController {
             Stage stage = new Stage();
             stage.setTitle("Manage Join Requests - " + selectedTrip.getTitle());
             stage.setScene(new Scene(root, 600, 400));
+            stage.setResizable(true);
+            stage.setMaximized(true);
             stage.show();
 
         } catch (Exception e) {

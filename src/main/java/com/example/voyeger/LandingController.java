@@ -23,6 +23,8 @@ public class LandingController {
             Scene scene = new Scene(root, 1000, 700);
             stage.setScene(scene);
             stage.setTitle("Voyager+ - Trip Planner");
+            stage.setResizable(true);
+            stage.setMaximized(true);
             stage.show();
 
         } catch (Exception e) {
@@ -43,6 +45,8 @@ public class LandingController {
             Scene scene = new Scene(root, 1000, 700);
             stage.setScene(scene);
             stage.setTitle("Voyager+ - Sign In");
+            stage.setResizable(true);
+            stage.setMaximized(true);
             stage.show();
 
         } catch (Exception e) {

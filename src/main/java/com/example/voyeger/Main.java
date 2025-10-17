@@ -12,7 +12,8 @@ public class Main extends Application {
         Scene scene = new Scene(loader.load(), 1400, 800);
         stage.setTitle("Voyager+ - Welcome");
         stage.setScene(scene);
-        stage.setResizable(false);
+        stage.setResizable(true);
+        stage.setMaximized(true);
         stage.show();
     }
 

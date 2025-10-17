@@ -53,6 +53,8 @@ public class WelcomeController {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.setTitle("Voyager+ - Sign Up");
+            stage.setResizable(true);
+            stage.setMaximized(true);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -69,6 +71,8 @@ public class WelcomeController {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.setTitle("Voyager+ - Sign In");
+            stage.setResizable(true);
+            stage.setMaximized(true);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -76,4 +80,3 @@ public class WelcomeController {
         }
     }
 }
-
