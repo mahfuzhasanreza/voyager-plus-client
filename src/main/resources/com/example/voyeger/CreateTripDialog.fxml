@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<DialogPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.voyeger.CreateTripDialogController"
+            fx:id="dialogPane"
+            stylesheets="@Main.css"
+            prefWidth="500" prefHeight="550">
+
+    <content>
+        <VBox spacing="15">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <Label text="✈ Create New Trip" styleClass="dialog-title"/>
+            <Separator/>
+
+            <VBox spacing="8">
+                <Label text="Trip Title *" styleClass="field-label"/>
+                <TextField fx:id="titleField" promptText="e.g., Summer in Europe"/>
+            </VBox>
+
+            <VBox spacing="8">
+                <Label text="Trip Date *" styleClass="field-label"/>
+                <DatePicker fx:id="datePicker" promptText="Select date" prefWidth="200"/>
+            </VBox>
+
+            <VBox spacing="8">
+                <Label text="Route *" styleClass="field-label"/>
+                <TextField fx:id="routeField" promptText="e.g., Paris → Rome → Barcelona"/>
+            </VBox>
+
+            <VBox spacing="8">
+                <Label text="Budget (USD) *" styleClass="field-label"/>
+                <TextField fx:id="budgetField" promptText="e.g., 2500"/>
+            </VBox>
+
+            <VBox spacing="8">
+                <Label text="Description" styleClass="field-label"/>
+                <TextArea fx:id="descriptionArea" promptText="Describe your trip..."
+                          wrapText="true" prefRowCount="3"/>
+            </VBox>
+
+            <VBox spacing="8">
+                <Label text="Trip Type *" styleClass="field-label"/>
+                <HBox spacing="20">
+                    <RadioButton fx:id="soloTripRadio" text="🚶 Solo Trip"
+                                 toggleGroup="$tripTypeGroup" selected="true"/>
+                    <RadioButton fx:id="groupTripRadio" text="👥 Group Trip"
+                                 toggleGroup="$tripTypeGroup"/>
+                </HBox>
+            </VBox>
+
+        </VBox>
+    </content>
+
+</DialogPane>
+

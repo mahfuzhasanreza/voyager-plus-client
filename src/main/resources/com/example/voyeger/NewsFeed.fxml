@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.voyeger.NewsFeedController"
+            stylesheets="@Main.css">
+
+    <!-- Left Sidebar: Create Post -->
+    <left>
+        <VBox spacing="15" styleClass="create-post-sidebar">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <Label text="Create Post" styleClass="sidebar-title"/>
+            <Separator/>
+
+            <Label text="What's your next adventure?" styleClass="field-label"/>
+            <TextArea fx:id="createPostArea" promptText="Share your travel plans with everyone..."
+                      wrapText="true" prefRowCount="4" styleClass="create-post-area"/>
+
+            <Button text="✈ Create Trip Post" onAction="#handleCreatePost"
+                    styleClass="create-post-btn" maxWidth="Infinity"/>
+
+            <Separator/>
+
+            <VBox spacing="8" styleClass="info-box">
+                <Label text="📌 Quick Tips" styleClass="info-title"/>
+                <Label text="• Share your trip details" wrapText="true" styleClass="info-text"/>
+                <Label text="• Create group trips for others to join" wrapText="true" styleClass="info-text"/>
+                <Label text="• Like and comment on posts" wrapText="true" styleClass="info-text"/>
+            </VBox>
+
+        </VBox>
+    </left>
+
+    <!-- Center: News Feed -->
+    <center>
+        <VBox spacing="0" styleClass="feed-container">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <!-- Feed Header -->
+            <HBox alignment="CENTER_LEFT" spacing="15" styleClass="feed-header">
+                <Label text="News Feed" styleClass="feed-title"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="🔄 Refresh" onAction="#handleRefreshFeed" styleClass="icon-btn"/>
+            </HBox>
+
+            <Separator>
+                <VBox.margin>
+                    <Insets top="10" bottom="10"/>
+                </VBox.margin>
+            </Separator>
+
+            <!-- Feed Posts Container (ScrollPane) -->
+            <ScrollPane fitToWidth="true" styleClass="feed-scroll">
+                <VBox fx:id="feedContainer" spacing="15" styleClass="feed-posts">
+                    <!-- Posts will be dynamically loaded here -->
+                </VBox>
+            </ScrollPane>
+
+        </VBox>
+    </center>
+
+    <!-- Right Sidebar: Trending/Suggestions -->
+    <right>
+        <VBox spacing="15" styleClass="suggestions-sidebar">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <Label text="🌟 Trending Destinations" styleClass="sidebar-title"/>
+            <Separator/>
+
+            <VBox spacing="10">
+                <Label text="🗼 Paris, France" styleClass="trending-item"/>
+                <Label text="🏖 Bali, Indonesia" styleClass="trending-item"/>
+                <Label text="🗻 Tokyo, Japan" styleClass="trending-item"/>
+                <Label text="🏔 Swiss Alps" styleClass="trending-item"/>
+                <Label text="🌊 Maldives" styleClass="trending-item"/>
+            </VBox>
+
+        </VBox>
+    </right>
+
+</BorderPane>
+

@@ -35,6 +35,9 @@ public class TripPlannerController {
     @FXML
     private TextArea tripDetailsArea;
 
+    @FXML
+    private TextArea postContentArea;
+
     private TripService tripService;
     private ObservableList<Trip> myTrips;
     private ObservableList<Trip> availableTrips;
@@ -66,14 +69,14 @@ public class TripPlannerController {
 
     @FXML
     private void handleCreateTrip() {
-        String title = titleField.getText();
-        String route = routeField.getText();
-        String budgetStr = budgetField.getText();
-        String description = descriptionArea.getText();
+        String title = titleField.getText().trim();
+        String route = routeField.getText().trim();
+        String budgetStr = budgetField.getText().trim();
+        String description = descriptionArea.getText().trim();
         Trip.TripType type = soloTripRadio.isSelected() ? Trip.TripType.SOLO : Trip.TripType.GROUP;
 
         if (title.isEmpty() || route.isEmpty() || budgetStr.isEmpty() || datePicker.getValue() == null) {
-            statusLabel.setText("⚠ Please fill in all fields!");
+            statusLabel.setText("⚠ Please fill in all required fields!");
             statusLabel.setStyle("-fx-text-fill: red;");
             return;
         }
@@ -81,12 +84,17 @@ public class TripPlannerController {
         try {
             double budget = Double.parseDouble(budgetStr);
             Trip trip = tripService.createTrip(title, datePicker.getValue(), route, budget, description, type);
-            tripService.postTrip(trip.getId());
 
-            statusLabel.setText("✅ " + type + " trip created and posted successfully!");
+            // Create post content
+            String postContent = postContentArea != null && !postContentArea.getText().trim().isEmpty()
+                ? postContentArea.getText().trim()
+                : "Check out my new " + type.toString().toLowerCase() + " trip!";
+
+            tripService.postTrip(trip.getId(), postContent);
+
+            statusLabel.setText("✅ " + type + " trip created and posted to news feed!");
             statusLabel.setStyle("-fx-text-fill: green;");
 
-            // Clear form
             clearForm();
             refreshTrips();
 
@@ -109,7 +117,7 @@ public class TripPlannerController {
             return;
         }
 
-        if (selectedTrip.getCreatorUsername().equals(tripService.getCurrentUser())) {
+        if (selectedTrip.getCreatorUsername().equals(tripService.getCurrentUser().getUsername())) {
             showAlert("Cannot Join", "You are the creator of this trip.");
             return;
         }
@@ -167,11 +175,11 @@ public class TripPlannerController {
 
     private void refreshTrips() {
         myTrips.clear();
-        myTrips.addAll(tripService.getUserTrips(tripService.getCurrentUser()));
+        myTrips.addAll(tripService.getUserTrips(tripService.getCurrentUser().getUsername()));
 
         availableTrips.clear();
         availableTrips.addAll(tripService.getPostedTrips().stream()
-                .filter(trip -> !trip.getCreatorUsername().equals(tripService.getCurrentUser()))
+                .filter(trip -> !trip.getCreatorUsername().equals(tripService.getCurrentUser().getUsername()))
                 .toList());
     }
 
@@ -207,6 +215,7 @@ public class TripPlannerController {
         routeField.clear();
         budgetField.clear();
         descriptionArea.clear();
+        if (postContentArea != null) postContentArea.clear();
         datePicker.setValue(null);
         soloTripRadio.setSelected(true);
     }

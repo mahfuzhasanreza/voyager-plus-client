@@ -1,0 +1,532 @@
+/* Main Styles for Voyager+ */
+
+.root {
+    -fx-font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    -fx-background-color: #f0f2f5;
+}
+
+/* ==================== NAVBAR ==================== */
+.navbar {
+    -fx-background-color: white;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);
+}
+
+.app-logo {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1877f2;
+}
+
+.nav-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #65676b;
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+    -fx-padding: 10 16;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+
+.nav-btn:hover {
+    -fx-background-color: #f0f2f5;
+}
+
+.active-nav-btn {
+    -fx-background-color: #e7f3ff !important;
+    -fx-text-fill: #1877f2 !important;
+    -fx-border-color: #1877f2;
+    -fx-border-width: 0 0 3 0;
+}
+
+.current-user-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #050505;
+}
+
+.online-status {
+    -fx-font-size: 11px;
+    -fx-text-fill: #31a24c;
+}
+
+/* ==================== MAIN CONTENT ==================== */
+.main-content {
+    -fx-background-color: #f0f2f5;
+}
+
+/* ==================== SIDEBARS ==================== */
+.create-post-sidebar, .suggestions-sidebar {
+    -fx-background-color: white;
+    -fx-pref-width: 300;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.08), 5, 0, 0, 0);
+}
+
+.sidebar-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #050505;
+}
+
+.info-box {
+    -fx-background-color: #f7f8fa;
+    -fx-padding: 12;
+    -fx-background-radius: 8;
+}
+
+.info-title {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #050505;
+}
+
+.info-text {
+    -fx-font-size: 12px;
+    -fx-text-fill: #65676b;
+}
+
+.trending-item {
+    -fx-font-size: 13px;
+    -fx-text-fill: #050505;
+    -fx-padding: 8;
+    -fx-background-color: #f7f8fa;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.trending-item:hover {
+    -fx-background-color: #e4e6eb;
+}
+
+/* ==================== NEWS FEED ==================== */
+.feed-container {
+    -fx-background-color: transparent;
+}
+
+.feed-header {
+    -fx-padding: 0 0 10 0;
+}
+
+.feed-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #050505;
+}
+
+.feed-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+
+.feed-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+.feed-posts {
+    -fx-background-color: transparent;
+}
+
+/* ==================== POST CARDS ==================== */
+.post-card {
+    -fx-background-color: white;
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+
+.avatar-circle {
+    -fx-min-width: 40px;
+    -fx-min-height: 40px;
+    -fx-max-width: 40px;
+    -fx-max-height: 40px;
+    -fx-background-color: #1877f2;
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+    -fx-background-radius: 50%;
+}
+
+.post-author {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #050505;
+}
+
+.post-time {
+    -fx-font-size: 12px;
+    -fx-text-fill: #65676b;
+}
+
+.post-content {
+    -fx-font-size: 14px;
+    -fx-text-fill: #050505;
+    -fx-padding: 8 0;
+}
+
+/* ==================== TRIP DETAILS CARD ==================== */
+.trip-details-card {
+    -fx-background-color: #f7f8fa;
+    -fx-background-radius: 8;
+    -fx-border-color: #e4e6eb;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+}
+
+.trip-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #050505;
+}
+
+.trip-description {
+    -fx-font-size: 13px;
+    -fx-text-fill: #65676b;
+    -fx-padding: 8 0 0 0;
+}
+
+/* ==================== POST ACTIONS ==================== */
+.post-actions {
+    -fx-padding: 8 0 0 0;
+}
+
+.action-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #65676b;
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+    -fx-padding: 8 12;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.action-btn:hover {
+    -fx-background-color: #f0f2f5;
+}
+
+.action-btn-primary {
+    -fx-background-color: #1877f2;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+    -fx-padding: 8 16;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.action-btn-primary:hover {
+    -fx-background-color: #166fe5;
+}
+
+.action-btn-primary:disabled {
+    -fx-background-color: #e4e6eb;
+    -fx-text-fill: #bcc0c4;
+}
+
+/* ==================== CREATE POST ==================== */
+.create-post-area {
+    -fx-background-color: #f7f8fa;
+    -fx-border-color: #ced0d4;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 10;
+    -fx-font-size: 14px;
+}
+
+.create-post-area:focused {
+    -fx-border-color: #1877f2;
+    -fx-border-width: 2;
+}
+
+.create-post-btn {
+    -fx-background-color: #1877f2;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-padding: 12 20;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+
+.create-post-btn:hover {
+    -fx-background-color: #166fe5;
+}
+
+/* ==================== BUTTONS ==================== */
+.primary-btn {
+    -fx-background-color: #1877f2;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-padding: 10 20;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+}
+
+.primary-btn:hover {
+    -fx-background-color: #166fe5;
+}
+
+.secondary-btn {
+    -fx-background-color: #e4e6eb;
+    -fx-text-fill: #050505;
+    -fx-font-weight: 600;
+    -fx-background-radius: 8;
+    -fx-padding: 10 20;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+}
+
+.secondary-btn:hover {
+    -fx-background-color: #d8dadf;
+}
+
+.icon-btn {
+    -fx-background-color: #e4e6eb;
+    -fx-text-fill: #050505;
+    -fx-font-weight: 600;
+    -fx-background-radius: 8;
+    -fx-padding: 8 14;
+    -fx-font-size: 13px;
+    -fx-cursor: hand;
+}
+
+.icon-btn:hover {
+    -fx-background-color: #d8dadf;
+}
+
+/* ==================== FORM ELEMENTS ==================== */
+.field-label {
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #050505;
+}
+
+.text-field, .text-area, .date-picker {
+    -fx-background-color: #f7f8fa;
+    -fx-border-color: #ced0d4;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 10;
+    -fx-font-size: 14px;
+}
+
+.text-field:focused, .text-area:focused, .date-picker:focused {
+    -fx-border-color: #1877f2;
+    -fx-border-width: 2;
+    -fx-background-color: white;
+}
+
+/* ==================== SETTINGS PAGE ==================== */
+.settings-scroll {
+    -fx-background-color: transparent;
+}
+
+.settings-container {
+    -fx-background-color: white;
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);
+    -fx-max-width: 800;
+}
+
+.settings-section {
+    -fx-background-color: #f7f8fa;
+    -fx-padding: 20;
+    -fx-background-radius: 8;
+}
+
+.page-title {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #050505;
+}
+
+.page-subtitle {
+    -fx-font-size: 14px;
+    -fx-text-fill: #65676b;
+}
+
+.section-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #050505;
+}
+
+.status-label {
+    -fx-font-size: 14px;
+    -fx-padding: 10;
+    -fx-background-color: #e7f3ff;
+    -fx-background-radius: 6;
+}
+
+/* ==================== PROFILE PAGE ==================== */
+.profile-scroll {
+    -fx-background-color: transparent;
+}
+
+.profile-container {
+    -fx-background-color: white;
+}
+
+.cover-photo-area {
+    -fx-background-color: linear-gradient(to bottom right, #1877f2, #42b983);
+    -fx-min-height: 200;
+}
+
+.profile-avatar-large {
+    -fx-min-width: 80px;
+    -fx-min-height: 80px;
+    -fx-max-width: 80px;
+    -fx-max-height: 80px;
+    -fx-background-color: white;
+    -fx-text-fill: #1877f2;
+    -fx-font-size: 40px;
+    -fx-alignment: center;
+    -fx-background-radius: 50%;
+    -fx-border-color: white;
+    -fx-border-width: 4;
+    -fx-border-radius: 50%;
+}
+
+.profile-display-name {
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.profile-username {
+    -fx-font-size: 16px;
+    -fx-text-fill: #e4e6eb;
+}
+
+.profile-section {
+    -fx-padding: 15 0;
+}
+
+.bio-text {
+    -fx-font-size: 15px;
+    -fx-text-fill: #050505;
+}
+
+.profile-info {
+    -fx-font-size: 13px;
+    -fx-text-fill: #65676b;
+}
+
+.profile-stats {
+    -fx-padding: 15;
+    -fx-background-color: #f7f8fa;
+    -fx-background-radius: 8;
+}
+
+.stat-number {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1877f2;
+}
+
+.stat-label {
+    -fx-font-size: 13px;
+    -fx-text-fill: #65676b;
+}
+
+/* ==================== MINI POST CARDS ==================== */
+.mini-post-card {
+    -fx-background-color: #f7f8fa;
+    -fx-background-radius: 8;
+    -fx-border-color: #e4e6eb;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+}
+
+.mini-trip-title {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #050505;
+}
+
+.mini-trip-info {
+    -fx-font-size: 13px;
+    -fx-text-fill: #65676b;
+}
+
+/* ==================== TRIP LIST ==================== */
+.trip-list {
+    -fx-background-color: white;
+    -fx-border-color: #e4e6eb;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+
+.trip-list .list-cell {
+    -fx-background-color: white;
+    -fx-text-fill: #050505;
+    -fx-padding: 12;
+    -fx-font-size: 14px;
+    -fx-border-color: transparent transparent #e4e6eb transparent;
+    -fx-border-width: 1;
+}
+
+.trip-list .list-cell:selected {
+    -fx-background-color: #e7f3ff;
+    -fx-text-fill: #050505;
+}
+
+.trip-list .list-cell:hover {
+    -fx-background-color: #f7f8fa;
+}
+
+/* ==================== DIALOG ==================== */
+.dialog-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #050505;
+}
+
+.dialog-pane {
+    -fx-background-color: white;
+}
+
+/* ==================== RADIO BUTTONS ==================== */
+.radio-button {
+    -fx-font-size: 14px;
+    -fx-text-fill: #050505;
+    -fx-cursor: hand;
+}
+
+.radio-button .radio {
+    -fx-background-color: white;
+    -fx-border-color: #8a8d91;
+    -fx-border-width: 2;
+}
+
+.radio-button:selected .radio {
+    -fx-background-color: #1877f2;
+    -fx-border-color: #1877f2;
+}
+
+.radio-button .dot {
+    -fx-background-color: white;
+}
+
+/* ==================== SEPARATOR ==================== */
+.separator {
+    -fx-background-color: #e4e6eb;
+}
+
+/* ==================== SCROLL BARS ==================== */
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #c4c4c4;
+    -fx-background-radius: 5;
+}
+
+.scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+}
+

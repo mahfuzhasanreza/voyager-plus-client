@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.voyeger.ProfileController"
+            stylesheets="@Main.css">
+
+    <center>
+        <ScrollPane fitToWidth="true" styleClass="profile-scroll">
+            <VBox spacing="0" styleClass="profile-container">
+
+                <!-- Cover Photo Area -->
+                <VBox styleClass="cover-photo-area" alignment="BOTTOM_LEFT">
+                    <padding>
+                        <Insets top="80" right="30" bottom="20" left="30"/>
+                    </padding>
+
+                    <!-- Profile Picture Circle -->
+                    <HBox alignment="BOTTOM_LEFT" spacing="20">
+                        <Label text="👤" styleClass="profile-avatar-large"/>
+                        <VBox alignment="BOTTOM_LEFT" spacing="5">
+                            <Label fx:id="displayNameLabel" text="User Name" styleClass="profile-display-name"/>
+                            <Label fx:id="usernameLabel" text="@username" styleClass="profile-username"/>
+                        </VBox>
+                    </HBox>
+                </VBox>
+
+                <!-- Profile Content -->
+                <VBox spacing="20">
+                    <padding>
+                        <Insets top="20" right="30" bottom="30" left="30"/>
+                    </padding>
+
+                    <!-- Bio Section -->
+                    <VBox spacing="10" styleClass="profile-section">
+                        <Label text="About" styleClass="section-title"/>
+                        <Label fx:id="bioLabel" text="Bio goes here" wrapText="true" styleClass="bio-text"/>
+                        <HBox spacing="20">
+                            <Label fx:id="emailLabel" text="email@example.com" styleClass="profile-info"/>
+                            <Label fx:id="joinedDateLabel" text="Joined Jan 2024" styleClass="profile-info"/>
+                        </HBox>
+                    </VBox>
+
+                    <Separator/>
+
+                    <!-- Stats Section -->
+                    <HBox spacing="40" styleClass="profile-stats">
+                        <VBox alignment="CENTER" spacing="5">
+                            <Label fx:id="tripCountLabel" text="0" styleClass="stat-number"/>
+                            <Label text="Trips" styleClass="stat-label"/>
+                        </VBox>
+                        <VBox alignment="CENTER" spacing="5">
+                            <Label fx:id="postCountLabel" text="0" styleClass="stat-number"/>
+                            <Label text="Posts" styleClass="stat-label"/>
+                        </VBox>
+                    </HBox>
+
+                    <Separator/>
+
+                    <!-- My Trips Section -->
+                    <VBox spacing="10" styleClass="profile-section">
+                        <HBox alignment="CENTER_LEFT" spacing="15">
+                            <Label text="My Trips" styleClass="section-title"/>
+                            <Region HBox.hgrow="ALWAYS"/>
+                            <Button text="🔄 Refresh" onAction="#handleRefreshProfile" styleClass="icon-btn"/>
+                        </HBox>
+                        <ListView fx:id="myTripsListView" prefHeight="200" styleClass="trip-list"/>
+                    </VBox>
+
+                    <Separator/>
+
+                    <!-- My Posts Section -->
+                    <VBox spacing="10" styleClass="profile-section">
+                        <Label text="My Posts" styleClass="section-title"/>
+                        <VBox fx:id="myPostsContainer" spacing="10">
+                            <!-- Posts will be dynamically loaded here -->
+                        </VBox>
+                    </VBox>
+
+                </VBox>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+
+</BorderPane>
+

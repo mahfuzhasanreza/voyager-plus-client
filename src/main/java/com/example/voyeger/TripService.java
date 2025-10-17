@@ -11,12 +11,30 @@ public class TripService {
     private static TripService instance;
     private Map<String, Trip> trips;
     private Map<String, GroupChat> groupChats;
-    private String currentUser; // Simulated current user
+    private Map<String, User> users;
+    private Map<String, TripPost> tripPosts;
+    private User currentUser;
 
     private TripService() {
         this.trips = new HashMap<>();
         this.groupChats = new HashMap<>();
-        this.currentUser = "User_Demo"; // Default user
+        this.users = new HashMap<>();
+        this.tripPosts = new HashMap<>();
+
+        // Create default users for demo
+        User defaultUser = new User("user_demo", "Demo User", "demo@voyagerplus.com");
+        defaultUser.setBio("Adventure seeker and travel enthusiast! 🌍✈️");
+        users.put(defaultUser.getUsername(), defaultUser);
+
+        User alice = new User("alice", "Alice Johnson", "alice@voyagerplus.com");
+        alice.setBio("Love exploring new places!");
+        users.put(alice.getUsername(), alice);
+
+        User bob = new User("bob", "Bob Smith", "bob@voyagerplus.com");
+        bob.setBio("Travel blogger & photographer 📸");
+        users.put(bob.getUsername(), bob);
+
+        this.currentUser = defaultUser;
     }
 
     public static TripService getInstance() {
@@ -26,28 +44,78 @@ public class TripService {
         return instance;
     }
 
-    public String getCurrentUser() {
+    // User Management
+    public User getCurrentUser() {
         return currentUser;
     }
 
-    public void setCurrentUser(String username) {
-        this.currentUser = username;
+    public void setCurrentUser(User user) {
+        this.currentUser = user;
     }
 
-    // Create a new trip
+    public User getUser(String username) {
+        return users.get(username);
+    }
+
+    public List<User> getAllUsers() {
+        return new ArrayList<>(users.values());
+    }
+
+    public void updateUser(User user) {
+        users.put(user.getUsername(), user);
+    }
+
+    // Create a new trip and post it
     public Trip createTrip(String title, java.time.LocalDate date, String route,
                           double budget, String description, Trip.TripType type) {
         String tripId = UUID.randomUUID().toString();
-        Trip trip = new Trip(tripId, title, date, route, budget, description, type, currentUser);
+        Trip trip = new Trip(tripId, title, date, route, budget, description, type, currentUser.getUsername());
         trips.put(tripId, trip);
         return trip;
     }
 
-    // Post a trip (make it visible)
-    public void postTrip(String tripId) {
+    // Post a trip (make it visible) and create a trip post for news feed
+    public TripPost postTrip(String tripId, String postContent) {
         Trip trip = trips.get(tripId);
         if (trip != null) {
             trip.setStatus(Trip.TripStatus.POSTED);
+
+            // Create a trip post for the news feed
+            String postId = UUID.randomUUID().toString();
+            TripPost post = new TripPost(postId, trip, currentUser, postContent);
+            tripPosts.put(postId, post);
+            return post;
+        }
+        return null;
+    }
+
+    // Get all trip posts for news feed (sorted by most recent)
+    public List<TripPost> getNewsFeed() {
+        return tripPosts.values().stream()
+                .sorted((p1, p2) -> p2.getPostedAt().compareTo(p1.getPostedAt()))
+                .collect(Collectors.toList());
+    }
+
+    // Get user's own posts
+    public List<TripPost> getUserPosts(String username) {
+        return tripPosts.values().stream()
+                .filter(post -> post.getAuthor().getUsername().equals(username))
+                .sorted((p1, p2) -> p2.getPostedAt().compareTo(p1.getPostedAt()))
+                .collect(Collectors.toList());
+    }
+
+    // Like/Unlike a post
+    public void likePost(String postId) {
+        TripPost post = tripPosts.get(postId);
+        if (post != null) {
+            post.like();
+        }
+    }
+
+    public void unlikePost(String postId) {
+        TripPost post = tripPosts.get(postId);
+        if (post != null) {
+            post.unlike();
         }
     }
 
@@ -85,7 +153,7 @@ public class TripService {
         }
 
         String requestId = UUID.randomUUID().toString();
-        JoinRequest request = new JoinRequest(requestId, tripId, currentUser, message);
+        JoinRequest request = new JoinRequest(requestId, tripId, currentUser.getUsername(), message);
         trip.addJoinRequest(request);
         return request;
     }
@@ -133,19 +201,20 @@ public class TripService {
             return;
         }
 
-        JoinRequest request = trip.getJoinRequests().stream()
+        trip.getJoinRequests().stream()
                 .filter(r -> r.getId().equals(requestId))
                 .findFirst()
-                .orElse(null);
-
-        if (request != null) {
-            request.reject();
-        }
+                .ifPresent(JoinRequest::reject);
     }
 
     // Get trip by ID
     public Trip getTrip(String tripId) {
         return trips.get(tripId);
+    }
+
+    // Get trip post by ID
+    public TripPost getTripPost(String postId) {
+        return tripPosts.get(postId);
     }
 
     // Get group chat for a trip
@@ -165,4 +234,3 @@ public class TripService {
                 .collect(Collectors.toList());
     }
 }
-

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.voyeger.SettingsController"
+            stylesheets="@Main.css">
+
+    <center>
+        <ScrollPane fitToWidth="true" styleClass="settings-scroll">
+            <VBox spacing="20" styleClass="settings-container">
+                <padding>
+                    <Insets top="30" right="40" bottom="30" left="40"/>
+                </padding>
+
+                <!-- Header -->
+                <VBox spacing="5">
+                    <Label text="⚙ Settings" styleClass="page-title"/>
+                    <Label text="Manage your account and profile information" styleClass="page-subtitle"/>
+                </VBox>
+
+                <Separator/>
+
+                <!-- Profile Information Section -->
+                <VBox spacing="15" styleClass="settings-section">
+                    <Label text="Profile Information" styleClass="section-title"/>
+
+                    <VBox spacing="8">
+                        <Label text="Display Name *" styleClass="field-label"/>
+                        <TextField fx:id="displayNameField" promptText="Enter your display name"/>
+                    </VBox>
+
+                    <VBox spacing="8">
+                        <Label text="Email Address *" styleClass="field-label"/>
+                        <TextField fx:id="emailField" promptText="Enter your email"/>
+                    </VBox>
+
+                    <VBox spacing="8">
+                        <Label text="Bio" styleClass="field-label"/>
+                        <TextArea fx:id="bioArea" promptText="Tell us about yourself..."
+                                  wrapText="true" prefRowCount="4"/>
+                    </VBox>
+                </VBox>
+
+                <Separator/>
+
+                <!-- Profile Images Section -->
+                <VBox spacing="15" styleClass="settings-section">
+                    <Label text="Profile Images" styleClass="section-title"/>
+
+                    <VBox spacing="8">
+                        <Label text="Profile Picture" styleClass="field-label"/>
+                        <HBox spacing="10">
+                            <TextField fx:id="profilePicField" promptText="Profile picture path" HBox.hgrow="ALWAYS"/>
+                            <Button text="Browse" onAction="#handleBrowseProfilePic" styleClass="secondary-btn"/>
+                        </HBox>
+                    </VBox>
+
+                    <VBox spacing="8">
+                        <Label text="Cover Photo" styleClass="field-label"/>
+                        <HBox spacing="10">
+                            <TextField fx:id="coverPhotoField" promptText="Cover photo path" HBox.hgrow="ALWAYS"/>
+                            <Button text="Browse" onAction="#handleBrowseCoverPhoto" styleClass="secondary-btn"/>
+                        </HBox>
+                    </VBox>
+                </VBox>
+
+                <Separator/>
+
+                <!-- Action Buttons -->
+                <HBox spacing="15" alignment="CENTER_LEFT">
+                    <Button text="💾 Save Settings" onAction="#handleSaveSettings"
+                            styleClass="primary-btn" prefWidth="150"/>
+                    <Button text="🔄 Reset" onAction="#handleResetSettings"
+                            styleClass="secondary-btn" prefWidth="120"/>
+                </HBox>
+
+                <!-- Status Label -->
+                <Label fx:id="statusLabel" wrapText="true" styleClass="status-label"/>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+
+</BorderPane>
+
