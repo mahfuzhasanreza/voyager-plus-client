@@ -1,0 +1,116 @@
+/* Navbar Styles */
+
+.navbar {
+    -fx-background-color: linear-gradient(to right, #1877f2, #0e6fd8);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 8, 0, 0, 2);
+}
+
+/* Brand Section */
+.brand-section {
+    -fx-cursor: hand;
+}
+
+.brand-logo {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 5, 0, 0, 1);
+    -fx-cursor: hand;
+}
+
+.brand-logo:hover {
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+/* Navigation Buttons Container */
+.nav-buttons-container {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-radius: 35;
+    -fx-padding: 8 15 8 15;
+}
+
+/* Navigation Buttons */
+.nav-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+    -fx-padding: 10 18 10 18;
+    -fx-background-radius: 20;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+}
+
+.nav-btn:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+/* Active Navigation Button */
+.active-nav {
+    -fx-background-color: rgba(255, 255, 255, 0.3) !important;
+    -fx-border-color: white;
+    -fx-border-width: 2;
+    -fx-border-radius: 20;
+}
+
+/* Dropdown Indicator */
+.nav-dropdown::after {
+    -fx-content: " ▼";
+}
+
+/* Notification Badge */
+.notification-badge {
+    -fx-min-width: 20px;
+    -fx-min-height: 20px;
+    -fx-max-width: 20px;
+    -fx-max-height: 20px;
+    -fx-background-color: #e74c3c;
+    -fx-background-radius: 10;
+    -fx-text-fill: white;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+    -fx-padding: 2;
+}
+
+/* Context Menu Styling */
+.context-menu {
+    -fx-background-color: white;
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 3);
+}
+
+.context-menu .menu-item {
+    -fx-padding: 10 20;
+    -fx-font-size: 14px;
+    -fx-text-fill: #2c3e50;
+}
+
+.context-menu .menu-item:hover {
+    -fx-background-color: #f0f2f5;
+}
+
+.context-menu .menu-item:focused {
+    -fx-background-color: #e7f3ff;
+}
+
+.context-menu .separator {
+    -fx-padding: 5 0;
+}
+
+/* Responsive adjustments (for future mobile view) */
+@media (max-width: 768px) {
+    .nav-btn {
+        -fx-font-size: 12px;
+        -fx-padding: 8 12 8 12;
+    }
+
+    .brand-logo {
+        -fx-font-size: 22px;
+    }
+}
+

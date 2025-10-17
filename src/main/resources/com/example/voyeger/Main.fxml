@@ -6,35 +6,12 @@
 
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.voyeger.MainController"
-            stylesheets="@Main.css"
+            stylesheets="@Main.css,@Navbar.css"
             prefWidth="1400" prefHeight="800">
 
-    <!-- Top Navigation Bar -->
+    <!-- Top: Shared Navbar -->
     <top>
-        <HBox styleClass="navbar" alignment="CENTER_LEFT" spacing="20">
-            <padding>
-                <Insets top="15" right="20" bottom="15" left="20"/>
-            </padding>
-
-            <Label text="Voyager+" styleClass="app-logo"/>
-
-            <Region HBox.hgrow="ALWAYS"/>
-
-            <!-- Navigation Buttons -->
-            <Button fx:id="newsFeedBtn" text="🏠 News Feed" onAction="#loadNewsFeed" styleClass="nav-btn"/>
-            <Button fx:id="tripPlannerBtn" text="✈ Plan Trip" onAction="#loadTripPlanner" styleClass="nav-btn"/>
-            <Button fx:id="profileBtn" text="👤 Profile" onAction="#loadProfile" styleClass="nav-btn"/>
-            <Button fx:id="settingsBtn" text="⚙ Settings" onAction="#loadSettings" styleClass="nav-btn"/>
-
-            <Separator orientation="VERTICAL"/>
-
-            <!-- User Info -->
-            <VBox alignment="CENTER_RIGHT" spacing="2">
-                <Label fx:id="currentUserLabel" text="User" styleClass="current-user-label"/>
-                <Label text="Online" styleClass="online-status"/>
-            </VBox>
-
-        </HBox>
+        <fx:include source="Navbar.fxml"/>
     </top>
 
     <!-- Center: Dynamic Content Area -->
@@ -45,4 +22,3 @@
     </center>
 
 </BorderPane>
-
