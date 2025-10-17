@@ -1,0 +1,152 @@
+/* Authentication Pages Styles */
+
+.root {
+    -fx-font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Left Panel with Gradient Background */
+.auth-left-panel {
+    -fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -fx-pref-width: 400;
+    -fx-padding: 50 40;
+}
+
+.auth-logo-icon {
+    -fx-font-size: 60px;
+    -fx-text-fill: white;
+}
+
+.auth-logo-text {
+    -fx-font-size: 42px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.auth-tagline {
+    -fx-font-size: 20px;
+    -fx-text-fill: rgba(255, 255, 255, 0.9);
+    -fx-font-weight: 500;
+}
+
+.benefits-box {
+    -fx-background-color: rgba(255, 255, 255, 0.15);
+    -fx-background-radius: 15;
+    -fx-padding: 25 20;
+    -fx-spacing: 12;
+    -fx-max-width: 300;
+}
+
+.benefit-item {
+    -fx-font-size: 15px;
+    -fx-text-fill: white;
+    -fx-font-weight: 500;
+}
+
+/* Right Panel - Form */
+.auth-form-container {
+    -fx-background-color: white;
+}
+
+.auth-scroll {
+    -fx-background-color: white;
+}
+
+.form-title {
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+.form-subtitle {
+    -fx-font-size: 16px;
+    -fx-text-fill: #7f8c8d;
+}
+
+.field-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #2c3e50;
+}
+
+.auth-field {
+    -fx-font-size: 15px;
+    -fx-padding: 14 16;
+    -fx-background-color: #f8f9fa;
+    -fx-border-color: #e1e8ed;
+    -fx-border-width: 2;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+
+.auth-field:focused {
+    -fx-border-color: #667eea;
+    -fx-background-color: white;
+}
+
+.btn-primary {
+    -fx-background-color: #667eea;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+
+.btn-primary:hover {
+    -fx-background-color: #5568d3;
+}
+
+.btn-primary:pressed {
+    -fx-background-color: #4451b8;
+}
+
+.btn-back {
+    -fx-background-color: transparent;
+    -fx-text-fill: #7f8c8d;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+    -fx-underline: false;
+}
+
+.btn-back:hover {
+    -fx-text-fill: #667eea;
+    -fx-underline: true;
+}
+
+.link-text {
+    -fx-font-size: 14px;
+    -fx-text-fill: #7f8c8d;
+}
+
+.auth-link {
+    -fx-font-size: 14px;
+    -fx-text-fill: #667eea;
+    -fx-font-weight: bold;
+}
+
+.auth-link:hover {
+    -fx-underline: true;
+}
+
+.forgot-link {
+    -fx-font-size: 13px;
+    -fx-text-fill: #667eea;
+}
+
+.remember-checkbox {
+    -fx-font-size: 14px;
+    -fx-text-fill: #2c3e50;
+}
+
+.status-label {
+    -fx-font-size: 14px;
+    -fx-padding: 10;
+    -fx-background-radius: 6;
+    -fx-text-alignment: center;
+}
+
+/* Loading Indicator */
+.progress-indicator {
+    -fx-progress-color: #667eea;
+}
+

@@ -23,13 +23,22 @@ public class MainController {
     @FXML
     public void initialize() {
         tripService = TripService.getInstance();
-        updateUserInfo();
+
+        // Check if user is logged in
+        if (tripService.getCurrentUser() == null) {
+            currentUserLabel.setText("Guest");
+        } else {
+            updateUserInfo();
+        }
+
         loadNewsFeed(); // Load news feed by default
     }
 
     private void updateUserInfo() {
         User currentUser = tripService.getCurrentUser();
-        currentUserLabel.setText(currentUser.getDisplayName());
+        if (currentUser != null) {
+            currentUserLabel.setText(currentUser.getDisplayName());
+        }
     }
 
     @FXML
@@ -80,4 +89,3 @@ public class MainController {
         }
     }
 }
-

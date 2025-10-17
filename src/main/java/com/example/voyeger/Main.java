@@ -8,12 +8,18 @@ import javafx.stage.Stage;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Main.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Welcome.fxml"));
         Scene scene = new Scene(loader.load(), 1400, 800);
-        stage.setTitle("Voyager+ - Travel Together");
+        stage.setTitle("Voyager+ - Welcome");
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
+    }
 
+    @Override
+    public void stop() {
+        // Close MongoDB connection when app closes
+        DatabaseManager.getInstance().close();
     }
 
     public static void main(String[] args) {

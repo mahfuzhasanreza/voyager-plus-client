@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.voyeger.SignInController"
+            stylesheets="@Auth.css"
+            prefWidth="1000" prefHeight="700">
+
+    <!-- Left Side - Image/Branding -->
+    <left>
+        <VBox styleClass="auth-left-panel" alignment="CENTER" spacing="20">
+            <Label text="✈" styleClass="auth-logo-icon"/>
+            <Label text="Voyager+" styleClass="auth-logo-text"/>
+            <Label text="Welcome Back!" styleClass="auth-tagline"/>
+            <VBox spacing="15" alignment="CENTER" styleClass="benefits-box">
+                <Label text="Continue your adventure" styleClass="benefit-item"/>
+                <Label text="Check your trip updates" styleClass="benefit-item"/>
+                <Label text="Connect with your travel buddies" styleClass="benefit-item"/>
+            </VBox>
+        </VBox>
+    </left>
+
+    <!-- Right Side - Sign In Form -->
+    <center>
+        <VBox alignment="CENTER" spacing="30" styleClass="auth-form-container">
+            <padding>
+                <Insets top="80" right="60" bottom="80" left="60"/>
+            </padding>
+
+            <!-- Header -->
+            <VBox alignment="CENTER" spacing="8">
+                <Label text="Sign In" styleClass="form-title"/>
+                <Label text="Enter your credentials to continue" styleClass="form-subtitle"/>
+            </VBox>
+
+            <!-- Form Fields -->
+            <VBox spacing="20" maxWidth="380">
+
+                <VBox spacing="8">
+                    <Label text="Username or Email" styleClass="field-label"/>
+                    <TextField fx:id="usernameField" promptText="Enter username or email" styleClass="auth-field"/>
+                </VBox>
+
+                <VBox spacing="8">
+                    <Label text="Password" styleClass="field-label"/>
+                    <PasswordField fx:id="passwordField" promptText="Enter your password" styleClass="auth-field"/>
+                </VBox>
+
+                <!-- Remember Me & Forgot Password -->
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <CheckBox fx:id="rememberMeCheckBox" text="Remember me" styleClass="remember-checkbox"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Hyperlink text="Forgot Password?" styleClass="forgot-link"/>
+                </HBox>
+
+                <!-- Status Label -->
+                <Label fx:id="statusLabel" wrapText="true" styleClass="status-label"/>
+
+                <!-- Loading Indicator -->
+                <HBox alignment="CENTER">
+                    <ProgressIndicator fx:id="loadingIndicator" prefWidth="40" prefHeight="40"/>
+                </HBox>
+
+                <!-- Sign In Button -->
+                <Button text="Sign In" onAction="#handleSignIn" styleClass="btn-primary" maxWidth="Infinity" prefHeight="50"/>
+
+                <!-- Sign Up Link -->
+                <HBox alignment="CENTER" spacing="5">
+                    <Label text="Don't have an account?" styleClass="link-text"/>
+                    <Hyperlink text="Sign Up" onAction="#handleGoToSignUp" styleClass="auth-link"/>
+                </HBox>
+
+                <!-- Back Button -->
+                <Button text="← Back to Welcome" onAction="#handleBackToWelcome" styleClass="btn-back"/>
+
+            </VBox>
+
+        </VBox>
+    </center>
+
+</BorderPane>
+

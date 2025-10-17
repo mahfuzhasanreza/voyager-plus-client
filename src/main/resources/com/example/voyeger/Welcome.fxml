@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.example.voyeger.WelcomeController"
+           stylesheets="@Welcome.css"
+           prefWidth="1400" prefHeight="800">
+
+    <!-- Background Image Layer -->
+    <VBox styleClass="welcome-bg">
+        <!-- Overlay for better text readability -->
+        <StackPane styleClass="overlay" VBox.vgrow="ALWAYS"/>
+    </VBox>
+
+    <!-- Content Layer -->
+    <VBox alignment="CENTER" spacing="40" styleClass="welcome-content">
+        <padding>
+            <Insets top="100" right="50" bottom="100" left="50"/>
+        </padding>
+
+        <!-- Logo/Title Section -->
+        <VBox alignment="CENTER" spacing="15">
+            <Label text="✈" styleClass="logo-icon"/>
+            <Label fx:id="titleLabel" text="Voyager+" styleClass="welcome-title"/>
+            <Label fx:id="subtitleLabel" text="Your Ultimate Travel Companion" styleClass="welcome-subtitle"/>
+        </VBox>
+
+        <!-- Description -->
+        <VBox alignment="CENTER" spacing="10" maxWidth="600">
+            <Label text="Connect with travelers worldwide" styleClass="feature-text"/>
+            <Label text="Plan amazing group trips together" styleClass="feature-text"/>
+            <Label text="Share your adventures with the world" styleClass="feature-text"/>
+        </VBox>
+
+        <!-- Action Buttons -->
+        <VBox alignment="CENTER" spacing="20" maxWidth="400">
+            <Button text="Create Account" onAction="#handleSignUp" styleClass="btn-signup" maxWidth="Infinity" prefHeight="55"/>
+            <Button text="Sign In" onAction="#handleSignIn" styleClass="btn-signin" maxWidth="Infinity" prefHeight="55"/>
+        </VBox>
+
+        <!-- Footer Text -->
+        <Label text="Join thousands of travelers exploring the world together" styleClass="footer-text"/>
+
+    </VBox>
+
+</StackPane>
+

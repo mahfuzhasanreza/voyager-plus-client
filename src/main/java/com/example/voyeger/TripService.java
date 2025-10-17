@@ -21,20 +21,8 @@ public class TripService {
         this.users = new HashMap<>();
         this.tripPosts = new HashMap<>();
 
-        // Create default users for demo
-        User defaultUser = new User("user_demo", "Demo User", "demo@voyagerplus.com");
-        defaultUser.setBio("Adventure seeker and travel enthusiast! 🌍✈️");
-        users.put(defaultUser.getUsername(), defaultUser);
-
-        User alice = new User("alice", "Alice Johnson", "alice@voyagerplus.com");
-        alice.setBio("Love exploring new places!");
-        users.put(alice.getUsername(), alice);
-
-        User bob = new User("bob", "Bob Smith", "bob@voyagerplus.com");
-        bob.setBio("Travel blogger & photographer 📸");
-        users.put(bob.getUsername(), bob);
-
-        this.currentUser = defaultUser;
+        // Don't create default users - will be loaded from MongoDB
+        this.currentUser = null;
     }
 
     public static TripService getInstance() {
@@ -51,6 +39,10 @@ public class TripService {
 
     public void setCurrentUser(User user) {
         this.currentUser = user;
+        // Add user to local cache if not already there
+        if (user != null && !users.containsKey(user.getUsername())) {
+            users.put(user.getUsername(), user);
+        }
     }
 
     public User getUser(String username) {
