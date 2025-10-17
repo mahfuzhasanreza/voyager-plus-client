@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
  */
 public class Notification {
     private String id;
-    private String type; // "JOIN_REQUEST"
+    private String type; // "JOIN_REQUEST", "REQUEST_APPROVED", "REQUEST_REJECTED"
     private String tripId;
     private String tripTitle;
     private String tripRoute;
@@ -61,7 +61,29 @@ public class Notification {
     }
 
     public String getDisplayText() {
-        return requesterUsername + " wants to join your trip \"" + tripTitle + "\"";
+        // Handle different notification types
+        if ("REQUEST_APPROVED".equals(type)) {
+            return "✅ Your request has been approved!";
+        } else if ("REQUEST_REJECTED".equals(type)) {
+            return "❌ Your request was declined";
+        } else {
+            // Default: JOIN_REQUEST
+            return requesterUsername + " wants to join your trip \"" + tripTitle + "\"";
+        }
+    }
+
+    public String getDisplayMessage() {
+        // Return the actual message content
+        if ("REQUEST_APPROVED".equals(type) || "REQUEST_REJECTED".equals(type)) {
+            return message; // Use the formatted message from backend
+        } else {
+            return message; // Use the requester's message
+        }
+    }
+
+    public boolean isDismissable() {
+        // Only approved/rejected notifications can be dismissed
+        return "REQUEST_APPROVED".equals(type) || "REQUEST_REJECTED".equals(type);
     }
 
     public String getTimeAgo() {
@@ -86,4 +108,3 @@ public class Notification {
         return getDisplayText() + " (" + getTimeAgo() + ")";
     }
 }
-

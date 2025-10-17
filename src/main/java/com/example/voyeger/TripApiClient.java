@@ -483,10 +483,11 @@ public class TripApiClient {
             String tripTitle = extractJsonValue(json, "tripTitle");
             String tripRoute = extractJsonValue(json, "tripRoute");
             String requesterUsername = extractJsonValue(json, "requesterUsername");
+            String tripCreatorUsername = extractJsonValue(json, "tripCreatorUsername");
             String message = extractJsonValue(json, "message");
             String createdAtStr = extractJsonValue(json, "createdAt");
 
-            if (id == null || requesterUsername == null || tripTitle == null) {
+            if (id == null || tripTitle == null) {
                 return null;
             }
 
@@ -502,13 +503,16 @@ public class TripApiClient {
                 }
             }
 
+            // Use appropriate username based on notification type
+            String displayUsername = requesterUsername != null ? requesterUsername : tripCreatorUsername;
+
             return new Notification(
                 id,
                 type != null ? type : "JOIN_REQUEST",
                 tripId != null ? tripId : "",
                 tripTitle,
                 tripRoute != null ? tripRoute : "",
-                requesterUsername,
+                displayUsername != null ? displayUsername : "Unknown",
                 message != null ? message : "",
                 createdAt
             );
@@ -516,6 +520,38 @@ public class TripApiClient {
         } catch (Exception e) {
             System.err.println("Error in parseSingleNotification: " + e.getMessage());
             return null;
+        }
+    }
+
+    /**
+     * Dismiss a notification (mark as read/delete)
+     * @param username The username of the user dismissing the notification
+     * @param notificationId The ID of the notification to dismiss
+     * @return true if successful, false otherwise
+     */
+    public static boolean dismissNotification(String username, String notificationId) {
+        try {
+            String url = BASE_URL + "/notifications/" + URLEncoder.encode(username, StandardCharsets.UTF_8) + "/" + notificationId;
+            System.out.println("🗑️ Dismissing notification: " + notificationId);
+
+            URL urlObj = new URL(url);
+            HttpURLConnection conn = (HttpURLConnection) urlObj.openConnection();
+            conn.setRequestMethod("DELETE");
+            conn.setConnectTimeout(5000);
+            conn.setReadTimeout(5000);
+
+            int responseCode = conn.getResponseCode();
+            System.out.println("📡 HTTP Response Code: " + responseCode);
+
+            if (responseCode == 200) {
+                System.out.println("✅ Notification dismissed successfully");
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            System.err.println("❌ Error dismissing notification: " + e.getMessage());
+            e.printStackTrace();
+            return false;
         }
     }
 }

@@ -98,37 +98,217 @@ public class NotificationsController {
     }
 
     private void handleNotificationClick(Notification notification) {
-        // Open the Manage Requests dialog for the specific trip
+        // Handle different notification types
+        if ("JOIN_REQUEST".equals(notification.getType())) {
+            // Show a modal dialog to approve/decline the request directly
+            showJoinRequestModal(notification);
+        } else if ("REQUEST_APPROVED".equals(notification.getType()) || "REQUEST_REJECTED".equals(notification.getType())) {
+            // Show a dialog with the message and offer to dismiss
+            showResponseNotificationDialog(notification);
+        }
+    }
+
+    private void showJoinRequestModal(Notification notification) {
         try {
-            // Find the trip
+            // Fetch the specific request details from backend
             String tripId = notification.getTripId();
-            Trip trip = tripService.getTrip(tripId);
+            String requestId = notification.getId();
 
-            if (trip == null) {
-                // Try to fetch from backend if not in local cache
-                showAlert("Trip Not Found", "Unable to find the trip. Please try refreshing.");
-                return;
-            }
+            User currentUser = tripService.getCurrentUser();
+            if (currentUser == null) return;
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ManageRequests.fxml"));
-            Parent root = loader.load();
+            // Create a custom dialog
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setTitle("Join Request");
+            dialog.setHeaderText("Request from " + notification.getRequesterUsername());
 
-            ManageRequestsController controller = loader.getController();
-            controller.setTrip(trip);
+            // Create dialog content
+            javafx.scene.layout.VBox content = new javafx.scene.layout.VBox(15);
+            content.setStyle("-fx-padding: 20;");
 
-            Stage stage = new Stage();
-            stage.setTitle("Manage Join Requests - " + trip.getTitle());
-            stage.setScene(new Scene(root, 600, 400));
-            stage.setResizable(true);
-            stage.setMaximized(true);
-            stage.show();
+            Label tripLabel = new Label("Trip: " + notification.getTripTitle());
+            tripLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
 
-            // Refresh notifications after handling
-            stage.setOnHidden(e -> loadNotifications());
+            Label routeLabel = new Label("Route: " + notification.getTripRoute());
+            routeLabel.setStyle("-fx-font-size: 14px;");
+
+            Label requesterLabel = new Label("Requester: " + notification.getRequesterUsername());
+            requesterLabel.setStyle("-fx-font-size: 14px;");
+
+            Label messageHeaderLabel = new Label("Message:");
+            messageHeaderLabel.setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10 0 5 0;");
+
+            TextArea messageArea = new TextArea(notification.getDisplayMessage());
+            messageArea.setEditable(false);
+            messageArea.setWrapText(true);
+            messageArea.setPrefRowCount(3);
+            messageArea.setMaxHeight(80);
+
+            content.getChildren().addAll(
+                tripLabel,
+                routeLabel,
+                requesterLabel,
+                messageHeaderLabel,
+                messageArea
+            );
+
+            dialog.getDialogPane().setContent(content);
+
+            // Add buttons
+            ButtonType approveButton = new ButtonType("✅ Approve", ButtonBar.ButtonData.OK_DONE);
+            ButtonType declineButton = new ButtonType("❌ Decline", ButtonBar.ButtonData.NO);
+            ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            dialog.getDialogPane().getButtonTypes().addAll(approveButton, declineButton, cancelButton);
+
+            // Handle button clicks
+            dialog.showAndWait().ifPresent(response -> {
+                if (response == approveButton) {
+                    handleApproveRequest(tripId, requestId, currentUser.getUsername(), notification);
+                } else if (response == declineButton) {
+                    handleDeclineRequest(tripId, requestId, currentUser.getUsername(), notification);
+                }
+            });
 
         } catch (Exception e) {
             e.printStackTrace();
-            showAlert("Error", "Failed to open request management: " + e.getMessage());
+            showAlert("Error", "Failed to display request details: " + e.getMessage());
+        }
+    }
+
+    private void handleApproveRequest(String tripId, String requestId, String responderUsername, Notification notification) {
+        try {
+            // Call backend API to approve the request
+            boolean success = respondToRequest(tripId, requestId, "approve", responderUsername);
+
+            if (success) {
+                showAlert("Request Approved",
+                    "You have approved " + notification.getRequesterUsername() + "'s request to join \"" + notification.getTripTitle() + "\"");
+                loadNotifications(); // Refresh the list
+            } else {
+                showAlert("Error", "Failed to approve the request. Please try again.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Error", "Failed to approve request: " + e.getMessage());
+        }
+    }
+
+    private void handleDeclineRequest(String tripId, String requestId, String responderUsername, Notification notification) {
+        try {
+            // Confirm decline action
+            Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmAlert.setTitle("Confirm Decline");
+            confirmAlert.setHeaderText("Decline Join Request");
+            confirmAlert.setContentText("Are you sure you want to decline " + notification.getRequesterUsername() + "'s request?");
+
+            confirmAlert.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.OK) {
+                    // Call backend API to reject the request
+                    boolean success = respondToRequest(tripId, requestId, "reject", responderUsername);
+
+                    if (success) {
+                        showAlert("Request Declined",
+                            "You have declined " + notification.getRequesterUsername() + "'s request to join \"" + notification.getTripTitle() + "\"");
+                        loadNotifications(); // Refresh the list
+                    } else {
+                        showAlert("Error", "Failed to decline the request. Please try again.");
+                    }
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Error", "Failed to decline request: " + e.getMessage());
+        }
+    }
+
+    private boolean respondToRequest(String tripId, String requestId, String action, String responderUsername) {
+        try {
+            String url = "http://localhost:5000/trips/" + tripId + "/requests/" + requestId + "/respond";
+            System.out.println("📤 Responding to request: " + url);
+            System.out.println("   Action: " + action);
+
+            // Create JSON payload
+            String jsonPayload = "{" +
+                "\"action\":\"" + action + "\"," +
+                "\"responderUsername\":\"" + escapeJson(responderUsername) + "\"" +
+                "}";
+
+            java.net.URL urlObj = new java.net.URL(url);
+            java.net.HttpURLConnection conn = (java.net.HttpURLConnection) urlObj.openConnection();
+            conn.setRequestMethod("PUT");
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setDoOutput(true);
+            conn.setConnectTimeout(5000);
+            conn.setReadTimeout(5000);
+
+            // Write the payload
+            conn.getOutputStream().write(jsonPayload.getBytes(java.nio.charset.StandardCharsets.UTF_8));
+
+            int responseCode = conn.getResponseCode();
+            System.out.println("📡 HTTP Response Code: " + responseCode);
+
+            if (responseCode == 200) {
+                System.out.println("✅ Request responded successfully");
+                return true;
+            } else {
+                // Read error response
+                java.io.BufferedReader errorReader = new java.io.BufferedReader(
+                    new java.io.InputStreamReader(conn.getErrorStream()));
+                StringBuilder errorResponse = new StringBuilder();
+                String line;
+                while ((line = errorReader.readLine()) != null) {
+                    errorResponse.append(line);
+                }
+                errorReader.close();
+                System.err.println("❌ Error response: " + errorResponse.toString());
+                return false;
+            }
+        } catch (Exception e) {
+            System.err.println("❌ Error responding to request: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private String escapeJson(String str) {
+        if (str == null) return "";
+        return str.replace("\\", "\\\\")
+                  .replace("\"", "\\\"")
+                  .replace("\n", "\\n")
+                  .replace("\r", "\\r")
+                  .replace("\t", "\\t");
+    }
+
+    private void showResponseNotificationDialog(Notification notification) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Trip Request Response");
+        alert.setHeaderText(notification.getDisplayText());
+        alert.setContentText(notification.getDisplayMessage());
+
+        // Add dismiss button
+        ButtonType dismissButton = new ButtonType("Dismiss", ButtonBar.ButtonData.OK_DONE);
+        ButtonType closeButton = new ButtonType("Close", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(dismissButton, closeButton);
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == dismissButton) {
+                // Dismiss the notification
+                dismissNotification(notification);
+            }
+        });
+    }
+
+    private void dismissNotification(Notification notification) {
+        User currentUser = tripService.getCurrentUser();
+        if (currentUser == null) return;
+
+        boolean success = TripApiClient.dismissNotification(currentUser.getUsername(), notification.getId());
+        if (success) {
+            System.out.println("✅ Notification dismissed");
+            loadNotifications(); // Refresh the list
+        } else {
+            showAlert("Error", "Failed to dismiss notification. Please try again.");
         }
     }
 
