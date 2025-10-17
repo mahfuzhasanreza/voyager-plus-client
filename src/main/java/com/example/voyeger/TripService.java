@@ -98,6 +98,22 @@ public class TripService {
                 .collect(Collectors.toList());
     }
 
+    // Get solo trip posts for news feed
+    public List<TripPost> getSoloTripPosts() {
+        return tripPosts.values().stream()
+                .filter(post -> post.getTrip().getType() == Trip.TripType.SOLO)
+                .sorted((p1, p2) -> p2.getPostedAt().compareTo(p1.getPostedAt()))
+                .collect(Collectors.toList());
+    }
+
+    // Get group trip posts for news feed
+    public List<TripPost> getGroupTripPosts() {
+        return tripPosts.values().stream()
+                .filter(post -> post.getTrip().getType() == Trip.TripType.GROUP)
+                .sorted((p1, p2) -> p2.getPostedAt().compareTo(p1.getPostedAt()))
+                .collect(Collectors.toList());
+    }
+
     // Get user's own posts
     public List<TripPost> getUserPosts(String username) {
         return tripPosts.values().stream()

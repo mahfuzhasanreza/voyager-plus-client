@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
 
 public class NewsFeedController {
 
@@ -60,7 +61,7 @@ public class NewsFeedController {
 
         updateWelcomeBanner();
         setupQuickLinks();
-        loadNewsFeed();
+        loadNewsFeedWithSections();
     }
 
     private void updateWelcomeBanner() {
@@ -121,7 +122,7 @@ public class NewsFeedController {
                         TripPost post = tripService.postTrip(trip.getId(), content);
                         if (post != null) {
                             createPostArea.clear();
-                            loadNewsFeed();
+                            loadNewsFeedWithSections();
                             showAlert("Success", "Your trip has been posted to the news feed!");
                         }
                     }
@@ -136,7 +137,7 @@ public class NewsFeedController {
 
     @FXML
     private void handleRefreshFeed() {
-        loadNewsFeed();
+        loadNewsFeedWithSections();
         updateWelcomeBanner();
     }
 
@@ -170,19 +171,75 @@ public class NewsFeedController {
         navigateToPage("MiniGames.fxml", "Mini Games - Voyager+");
     }
 
-    private void loadNewsFeed() {
+    private void loadNewsFeedWithSections() {
         feedContainer.getChildren().clear();
-        posts.clear();
-        posts.addAll(tripService.getNewsFeed());
 
-        if (posts.isEmpty()) {
+        List<TripPost> soloTrips = tripService.getSoloTripPosts();
+        List<TripPost> groupTrips = tripService.getGroupTripPosts();
+
+        if (soloTrips.isEmpty() && groupTrips.isEmpty()) {
             VBox emptyState = createEmptyState();
             feedContainer.getChildren().add(emptyState);
-        } else {
-            for (TripPost post : posts) {
-                feedContainer.getChildren().add(createTripCard(post));
-            }
+            return;
         }
+
+        // Add Solo Trips Section
+        if (!soloTrips.isEmpty()) {
+            VBox soloSection = createTripSection("🚶 Solo Travel Adventures",
+                "Explore journeys of independent travelers",
+                soloTrips,
+                "#667eea");
+            feedContainer.getChildren().add(soloSection);
+        }
+
+        // Add spacing between sections
+        if (!soloTrips.isEmpty() && !groupTrips.isEmpty()) {
+            Region spacer = new Region();
+            spacer.setPrefHeight(30);
+            feedContainer.getChildren().add(spacer);
+        }
+
+        // Add Group Trips Section
+        if (!groupTrips.isEmpty()) {
+            VBox groupSection = createTripSection("👥 Group Adventures",
+                "Join exciting trips with fellow travelers",
+                groupTrips,
+                "#764ba2");
+            feedContainer.getChildren().add(groupSection);
+        }
+    }
+
+    private VBox createTripSection(String title, String subtitle, List<TripPost> tripPosts, String accentColor) {
+        VBox section = new VBox(20);
+        section.getStyleClass().add("trip-section");
+        section.setPadding(new Insets(0, 0, 20, 0));
+
+        // Section Header
+        VBox header = new VBox(5);
+        header.getStyleClass().add("section-header");
+        header.setPadding(new Insets(15, 20, 15, 20));
+        header.setStyle("-fx-background-color: linear-gradient(to right, " + accentColor + ", " + accentColor + "aa); " +
+                       "-fx-background-radius: 12px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);");
+
+        Label titleLabel = new Label(title);
+        titleLabel.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white;");
+
+        Label subtitleLabel = new Label(subtitle + " • " + tripPosts.size() + " posts");
+        subtitleLabel.setStyle("-fx-font-size: 13px; -fx-text-fill: rgba(255,255,255,0.9);");
+
+        header.getChildren().addAll(titleLabel, subtitleLabel);
+
+        // Posts Container
+        VBox postsContainer = new VBox(20);
+        postsContainer.setPadding(new Insets(20, 0, 0, 0));
+
+        for (TripPost post : tripPosts) {
+            VBox tripCard = createTripCard(post);
+            postsContainer.getChildren().add(tripCard);
+        }
+
+        section.getChildren().addAll(header, postsContainer);
+        return section;
     }
 
     private VBox createEmptyState() {
@@ -406,7 +463,7 @@ public class NewsFeedController {
         }
 
         // Refresh the feed to update like count
-        loadNewsFeed();
+        loadNewsFeedWithSections();
     }
 
     private void handleComment(TripPost post) {
