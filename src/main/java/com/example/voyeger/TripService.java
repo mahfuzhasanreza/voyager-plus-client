@@ -305,8 +305,52 @@ public class TripService {
             return new ArrayList<>();
         }
 
+        // Fetch join requests from backend API
+        if (currentUser != null) {
+            try {
+                System.out.println("🔍 Fetching join requests from backend for trip: " + tripId);
+                List<JoinRequest> backendRequests = TripApiClient.fetchJoinRequestsAsList(tripId, currentUser.getUsername());
+
+                // Update local trip with backend requests
+                trip.getJoinRequests().clear();
+                trip.getJoinRequests().addAll(backendRequests);
+
+                System.out.println("✅ Fetched " + backendRequests.size() + " requests from backend");
+            } catch (Exception e) {
+                System.err.println("❌ Error fetching requests from backend: " + e.getMessage());
+                e.printStackTrace();
+            }
+        }
+
         return trip.getJoinRequests().stream()
                 .filter(r -> r.getStatus() == JoinRequest.RequestStatus.PENDING)
                 .collect(Collectors.toList());
+    }
+
+    // Get all join requests for a trip (including approved/rejected)
+    public List<JoinRequest> getAllRequests(String tripId) {
+        Trip trip = trips.get(tripId);
+        if (trip == null) {
+            return new ArrayList<>();
+        }
+
+        // Fetch join requests from backend API
+        if (currentUser != null) {
+            try {
+                System.out.println("🔍 Fetching all join requests from backend for trip: " + tripId);
+                List<JoinRequest> backendRequests = TripApiClient.fetchJoinRequestsAsList(tripId, currentUser.getUsername());
+
+                // Update local trip with backend requests
+                trip.getJoinRequests().clear();
+                trip.getJoinRequests().addAll(backendRequests);
+
+                System.out.println("✅ Fetched " + backendRequests.size() + " total requests from backend");
+            } catch (Exception e) {
+                System.err.println("❌ Error fetching requests from backend: " + e.getMessage());
+                e.printStackTrace();
+            }
+        }
+
+        return new ArrayList<>(trip.getJoinRequests());
     }
 }

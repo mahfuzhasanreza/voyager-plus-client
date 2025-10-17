@@ -109,7 +109,8 @@ public class ManageRequestsController {
     private void refreshRequests() {
         requests.clear();
         if (trip != null) {
-            requests.addAll(tripService.getPendingRequests(trip.getId()));
+            // Fetch ALL requests from backend (pending, approved, rejected)
+            requests.addAll(tripService.getAllRequests(trip.getId()));
         }
     }
 
@@ -167,4 +168,3 @@ public class ManageRequestsController {
         }
     }
 }
-

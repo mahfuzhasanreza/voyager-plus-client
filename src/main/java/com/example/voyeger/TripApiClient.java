@@ -241,28 +241,83 @@ public class TripApiClient {
     }
 
     /**
-     * Respond to a join request (approve or reject)
+     * Fetch and parse join requests for a specific trip
      * @param tripId The MongoDB ObjectId of the trip
-     * @param requestId The MongoDB ObjectId of the join request
-     * @param action "approve" or "reject"
-     * @param responderUsername The username of the trip creator
-     * @return true if successful, false otherwise
+     * @param username The username of the trip creator
+     * @return List of JoinRequest objects
      */
-    public static boolean respondToJoinRequest(String tripId, String requestId, String action, String responderUsername) {
+    public static List<JoinRequest> fetchJoinRequestsAsList(String tripId, String username) {
         try {
-            String url = BASE_URL + "/trips/" + tripId + "/requests/" + requestId + "/respond";
-
-            String jsonPayload = "{" +
-                "\"action\":\"" + action + "\"," +
-                "\"responderUsername\":\"" + escapeJson(responderUsername) + "\"" +
-                "}";
-
-            String response = httpPut(url, jsonPayload);
-            return response != null && response.contains("message");
+            String jsonResponse = fetchJoinRequests(tripId, username);
+            return parseJoinRequestsFromJson(jsonResponse, tripId);
         } catch (Exception e) {
-            System.err.println("❌ Error responding to join request: " + e.getMessage());
+            System.err.println("❌ Error parsing join requests: " + e.getMessage());
             e.printStackTrace();
-            return false;
+            return new ArrayList<>();
+        }
+    }
+
+    /**
+     * Parse join requests from JSON array
+     */
+    private static List<JoinRequest> parseJoinRequestsFromJson(String json, String tripId) {
+        List<JoinRequest> requests = new ArrayList<>();
+
+        // Pattern to match each request object in the array
+        Pattern requestPattern = Pattern.compile("\\{[^}]+\\}");
+        Matcher requestMatcher = requestPattern.matcher(json);
+
+        while (requestMatcher.find()) {
+            String requestJson = requestMatcher.group();
+            try {
+                JoinRequest request = parseSingleJoinRequest(requestJson, tripId);
+                if (request != null) {
+                    requests.add(request);
+                }
+            } catch (Exception e) {
+                System.err.println("Error parsing join request: " + e.getMessage());
+            }
+        }
+
+        System.out.println("✅ Parsed " + requests.size() + " join requests from backend");
+        return requests;
+    }
+
+    /**
+     * Parse a single join request from JSON
+     */
+    private static JoinRequest parseSingleJoinRequest(String json, String tripId) {
+        try {
+            String requestId = extractJsonValue(json, "_id");
+            String requesterUsername = extractJsonValue(json, "requesterUsername");
+            String message = extractJsonValue(json, "message");
+            String statusStr = extractJsonValue(json, "status");
+
+            if (requestId == null || requesterUsername == null) {
+                return null;
+            }
+
+            JoinRequest request = new JoinRequest(requestId, tripId, requesterUsername, message != null ? message : "");
+
+            // Set status if provided
+            if (statusStr != null) {
+                try {
+                    if (statusStr.equalsIgnoreCase("APPROVED")) {
+                        request.approve();
+                    } else if (statusStr.equalsIgnoreCase("REJECTED")) {
+                        request.reject();
+                    }
+                    // Default is PENDING, no need to set
+                } catch (Exception e) {
+                    // Keep default PENDING status
+                }
+            }
+
+            return request;
+
+        } catch (Exception e) {
+            System.err.println("Error in parseSingleJoinRequest: " + e.getMessage());
+            return null;
         }
     }
 
@@ -342,5 +397,125 @@ public class TripApiClient {
                   .replace("\n", "\\n")
                   .replace("\r", "\\r")
                   .replace("\t", "\\t");
+    }
+
+    /**
+     * Fetch notifications for a user (join requests for their trips)
+     * @param username The username of the trip creator
+     * @return List of Notification objects
+     */
+    public static List<Notification> fetchNotifications(String username) {
+        try {
+            String url = BASE_URL + "/notifications/" + URLEncoder.encode(username, StandardCharsets.UTF_8);
+            String jsonResponse = httpGet(url);
+            return parseNotificationsFromJson(jsonResponse);
+        } catch (Exception e) {
+            System.err.println("❌ Error fetching notifications: " + e.getMessage());
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    /**
+     * Get the count of pending notifications for a user
+     * @param username The username of the trip creator
+     * @return Number of pending notifications
+     */
+    public static int fetchNotificationCount(String username) {
+        try {
+            String url = BASE_URL + "/notifications/" + URLEncoder.encode(username, StandardCharsets.UTF_8) + "/count";
+            System.out.println("🔍 Fetching notification count for user: " + username);
+            System.out.println("📡 URL: " + url);
+
+            String jsonResponse = httpGet(url);
+            System.out.println("📥 Response: " + jsonResponse);
+
+            // Extract count from JSON response {"count": 5}
+            String countStr = extractJsonValue(jsonResponse, "count");
+            if (countStr != null) {
+                int count = Integer.parseInt(countStr);
+                System.out.println("✅ Notification count: " + count);
+                return count;
+            }
+            System.out.println("⚠️ No count found in response");
+            return 0;
+        } catch (Exception e) {
+            System.err.println("❌ Error fetching notification count: " + e.getMessage());
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    /**
+     * Parse notifications from JSON array
+     */
+    private static List<Notification> parseNotificationsFromJson(String json) {
+        List<Notification> notifications = new ArrayList<>();
+
+        // Pattern to match each notification object in the array
+        Pattern notifPattern = Pattern.compile("\\{[^}]+\\}");
+        Matcher notifMatcher = notifPattern.matcher(json);
+
+        while (notifMatcher.find()) {
+            String notifJson = notifMatcher.group();
+            try {
+                Notification notification = parseSingleNotification(notifJson);
+                if (notification != null) {
+                    notifications.add(notification);
+                }
+            } catch (Exception e) {
+                System.err.println("Error parsing notification: " + e.getMessage());
+            }
+        }
+
+        System.out.println("✅ Parsed " + notifications.size() + " notifications from backend");
+        return notifications;
+    }
+
+    /**
+     * Parse a single notification from JSON
+     */
+    private static Notification parseSingleNotification(String json) {
+        try {
+            String id = extractJsonValue(json, "_id");
+            String type = extractJsonValue(json, "type");
+            String tripId = extractJsonValue(json, "tripId");
+            String tripTitle = extractJsonValue(json, "tripTitle");
+            String tripRoute = extractJsonValue(json, "tripRoute");
+            String requesterUsername = extractJsonValue(json, "requesterUsername");
+            String message = extractJsonValue(json, "message");
+            String createdAtStr = extractJsonValue(json, "createdAt");
+
+            if (id == null || requesterUsername == null || tripTitle == null) {
+                return null;
+            }
+
+            // Parse timestamp - for now use current time if parsing fails
+            java.time.LocalDateTime createdAt = java.time.LocalDateTime.now();
+            if (createdAtStr != null) {
+                try {
+                    // Parse ISO date format
+                    createdAt = java.time.LocalDateTime.parse(createdAtStr,
+                        java.time.format.DateTimeFormatter.ISO_DATE_TIME);
+                } catch (Exception e) {
+                    // Use current time if parsing fails
+                }
+            }
+
+            return new Notification(
+                id,
+                type != null ? type : "JOIN_REQUEST",
+                tripId != null ? tripId : "",
+                tripTitle,
+                tripRoute != null ? tripRoute : "",
+                requesterUsername,
+                message != null ? message : "",
+                createdAt
+            );
+
+        } catch (Exception e) {
+            System.err.println("Error in parseSingleNotification: " + e.getMessage());
+            return null;
+        }
     }
 }

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.voyeger.NotificationsController"
+      spacing="20"
+      style="-fx-background-color: #f5f5f5;">
+
+    <!-- Navbar -->
+    <fx:include source="Navbar.fxml"/>
+
+    <!-- Main Content -->
+    <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 30;">
+        <VBox.margin>
+            <Insets top="20" right="50" bottom="20" left="50"/>
+        </VBox.margin>
+
+        <!-- Header -->
+        <HBox alignment="CENTER_LEFT" spacing="20">
+            <Label fx:id="titleLabel" text="Notifications"
+                   style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #1976d2;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="🔄 Refresh" onAction="#handleRefresh"
+                    style="-fx-background-color: #1976d2; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20; -fx-background-radius: 5;"/>
+        </HBox>
+
+        <Separator/>
+
+        <!-- Notifications List -->
+        <StackPane VBox.vgrow="ALWAYS">
+            <ListView fx:id="notificationsListView"
+                      style="-fx-background-color: transparent; -fx-border-color: transparent;"
+                      VBox.vgrow="ALWAYS">
+                <VBox.margin>
+                    <Insets top="10"/>
+                </VBox.margin>
+            </ListView>
+
+            <!-- Empty State -->
+            <Label fx:id="emptyStateLabel"
+                   text="🔔 No new notifications"
+                   visible="false"
+                   style="-fx-font-size: 18px; -fx-text-fill: gray; -fx-padding: 50;"/>
+        </StackPane>
+
+        <!-- Instructions -->
+        <Label text="💡 Double-click on a notification to manage join requests"
+               style="-fx-font-size: 12px; -fx-text-fill: gray; -fx-padding: 10; -fx-background-color: #fff3cd; -fx-border-radius: 5; -fx-background-radius: 5;"/>
+    </VBox>
+</VBox>
+

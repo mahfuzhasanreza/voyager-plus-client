@@ -40,10 +40,14 @@
         <Button fx:id="toolsBtn" text="🧰 Tools" onAction="#handleTools" styleClass="nav-btn nav-dropdown"/>
 
         <!-- Community (Dropdown) -->
+        <Button fx:id="communityBtn" text="💬 Community" onAction="#handleCommunity" styleClass="nav-btn nav-dropdown"/>
+
+        <!-- Notifications Button with Badge -->
         <StackPane>
-            <Button fx:id="communityBtn" text="💬 Community" onAction="#handleCommunity" styleClass="nav-btn nav-dropdown"/>
+            <Button text="🔔" onAction="#handleNotifications" styleClass="nav-btn"
+                    style="-fx-font-size: 20px; -fx-min-width: 50px;"/>
             <!-- Notification Badge -->
-            <Label fx:id="notificationBadge" text="3" styleClass="notification-badge" visible="false"
+            <Label fx:id="notificationBadge" text="0" styleClass="notification-badge" visible="false"
                    StackPane.alignment="TOP_RIGHT">
                 <StackPane.margin>
                     <Insets top="5" right="5"/>
@@ -63,4 +67,3 @@
     </HBox>
 
 </HBox>
-

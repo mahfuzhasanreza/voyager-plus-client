@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.event.ActionEvent;
+import javafx.application.Platform;
 
 public class NavbarController {
 
@@ -26,12 +27,39 @@ public class NavbarController {
 
     private TripService tripService;
     private String currentPage = "home";
+    private java.util.Timer notificationTimer;
 
     @FXML
     public void initialize() {
         tripService = TripService.getInstance();
-        updateNotificationBadge();
         highlightCurrentPage(currentPage);
+
+        // Initial update
+        updateNotificationBadge();
+
+        // Start auto-refresh timer (every 30 seconds)
+        startNotificationTimer();
+    }
+
+    private void startNotificationTimer() {
+        if (notificationTimer != null) {
+            notificationTimer.cancel();
+        }
+
+        notificationTimer = new java.util.Timer(true);
+        notificationTimer.scheduleAtFixedRate(new java.util.TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(() -> updateNotificationBadge());
+            }
+        }, 10000, 30000); // First update after 10 seconds, then every 30 seconds
+    }
+
+    public void stopNotificationTimer() {
+        if (notificationTimer != null) {
+            notificationTimer.cancel();
+            notificationTimer = null;
+        }
     }
 
     public void setCurrentPage(String page) {
@@ -101,6 +129,11 @@ public class NavbarController {
     @FXML
     private void handleProfile(ActionEvent event) {
         showProfileMenu(event);
+    }
+
+    @FXML
+    private void handleNotifications(ActionEvent event) {
+        navigateToPage("Notifications.fxml", "Notifications - Voyager+", "home");
     }
 
     private void showTripsMenu(ActionEvent event) {
@@ -234,13 +267,17 @@ public class NavbarController {
     }
 
     private void updateNotificationBadge() {
-        // TODO: Update with actual notification count
-        // For now, set to 0 (hidden)
-        int notificationCount = 0;
+        // Fetch real notification count from backend
+        User currentUser = tripService.getCurrentUser();
+        if (currentUser != null) {
+            int notificationCount = TripApiClient.fetchNotificationCount(currentUser.getUsername());
 
-        if (notificationCount > 0) {
-            notificationBadge.setText(String.valueOf(notificationCount));
-            notificationBadge.setVisible(true);
+            if (notificationCount > 0) {
+                notificationBadge.setText(String.valueOf(notificationCount));
+                notificationBadge.setVisible(true);
+            } else {
+                notificationBadge.setVisible(false);
+            }
         } else {
             notificationBadge.setVisible(false);
         }
