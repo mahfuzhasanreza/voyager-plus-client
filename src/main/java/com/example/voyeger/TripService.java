@@ -217,6 +217,17 @@ public class TripService {
             return null;
         }
 
+        // Send join request to backend API to save in MongoDB
+        boolean apiSuccess = TripApiClient.sendJoinRequest(tripId, currentUser.getUsername(), message);
+
+        if (!apiSuccess) {
+            System.err.println("❌ Failed to save join request to database");
+            // Still create local request for UI feedback, but log the error
+        } else {
+            System.out.println("✅ Join request saved to MongoDB database");
+        }
+
+        // Also keep local copy for immediate UI updates
         String requestId = UUID.randomUUID().toString();
         JoinRequest request = new JoinRequest(requestId, tripId, currentUser.getUsername(), message);
         trip.addJoinRequest(request);

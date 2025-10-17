@@ -190,5 +190,157 @@ public class TripApiClient {
 
         return null;
     }
-}
 
+    /**
+     * Send a join request to a group trip
+     * @param tripId The MongoDB ObjectId of the trip
+     * @param requesterUsername The username of the person requesting to join
+     * @param message Optional message from the requester
+     * @return true if request was successful, false otherwise
+     */
+    public static boolean sendJoinRequest(String tripId, String requesterUsername, String message) {
+        try {
+            String url = BASE_URL + "/trips/" + tripId + "/request";
+
+            // Create JSON payload
+            String jsonPayload = "{" +
+                "\"requesterUsername\":\"" + escapeJson(requesterUsername) + "\"," +
+                "\"message\":\"" + escapeJson(message != null ? message : "") + "\"" +
+                "}";
+
+            System.out.println("📤 Sending join request to: " + url);
+            System.out.println("📤 Payload: " + jsonPayload);
+
+            String response = httpPost(url, jsonPayload);
+            System.out.println("✅ Join request response: " + response);
+
+            return response != null && response.contains("insertedId");
+        } catch (Exception e) {
+            System.err.println("❌ Error sending join request: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * Fetch join requests for a specific trip (trip owner only)
+     * @param tripId The MongoDB ObjectId of the trip
+     * @param username The username of the trip creator
+     * @return List of join requests (as JSON string for now)
+     */
+    public static String fetchJoinRequests(String tripId, String username) {
+        try {
+            String url = BASE_URL + "/trips/" + tripId + "/requests?username=" +
+                URLEncoder.encode(username, StandardCharsets.UTF_8);
+            return httpGet(url);
+        } catch (Exception e) {
+            System.err.println("❌ Error fetching join requests: " + e.getMessage());
+            e.printStackTrace();
+            return "[]";
+        }
+    }
+
+    /**
+     * Respond to a join request (approve or reject)
+     * @param tripId The MongoDB ObjectId of the trip
+     * @param requestId The MongoDB ObjectId of the join request
+     * @param action "approve" or "reject"
+     * @param responderUsername The username of the trip creator
+     * @return true if successful, false otherwise
+     */
+    public static boolean respondToJoinRequest(String tripId, String requestId, String action, String responderUsername) {
+        try {
+            String url = BASE_URL + "/trips/" + tripId + "/requests/" + requestId + "/respond";
+
+            String jsonPayload = "{" +
+                "\"action\":\"" + action + "\"," +
+                "\"responderUsername\":\"" + escapeJson(responderUsername) + "\"" +
+                "}";
+
+            String response = httpPut(url, jsonPayload);
+            return response != null && response.contains("message");
+        } catch (Exception e) {
+            System.err.println("❌ Error responding to join request: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private static String httpPost(String urlString, String jsonPayload) throws Exception {
+        URL url = new URL(urlString);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("POST");
+        conn.setRequestProperty("Content-Type", "application/json");
+        conn.setDoOutput(true);
+        conn.setConnectTimeout(5000);
+        conn.setReadTimeout(5000);
+
+        // Write the payload
+        conn.getOutputStream().write(jsonPayload.getBytes(StandardCharsets.UTF_8));
+
+        int responseCode = conn.getResponseCode();
+        System.out.println("📡 HTTP Response Code: " + responseCode);
+
+        if (responseCode != 200 && responseCode != 201) {
+            // Read error response
+            BufferedReader errorReader = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+            StringBuilder errorResponse = new StringBuilder();
+            String line;
+            while ((line = errorReader.readLine()) != null) {
+                errorResponse.append(line);
+            }
+            errorReader.close();
+            System.err.println("❌ Error response: " + errorResponse.toString());
+            throw new Exception("HTTP " + responseCode + ": " + errorResponse.toString());
+        }
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        StringBuilder response = new StringBuilder();
+        String line;
+
+        while ((line = in.readLine()) != null) {
+            response.append(line);
+        }
+        in.close();
+
+        return response.toString();
+    }
+
+    private static String httpPut(String urlString, String jsonPayload) throws Exception {
+        URL url = new URL(urlString);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("PUT");
+        conn.setRequestProperty("Content-Type", "application/json");
+        conn.setDoOutput(true);
+        conn.setConnectTimeout(5000);
+        conn.setReadTimeout(5000);
+
+        // Write the payload
+        conn.getOutputStream().write(jsonPayload.getBytes(StandardCharsets.UTF_8));
+
+        int responseCode = conn.getResponseCode();
+        if (responseCode != 200) {
+            throw new Exception("HTTP " + responseCode);
+        }
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        StringBuilder response = new StringBuilder();
+        String line;
+
+        while ((line = in.readLine()) != null) {
+            response.append(line);
+        }
+        in.close();
+
+        return response.toString();
+    }
+
+    private static String escapeJson(String str) {
+        if (str == null) return "";
+        return str.replace("\\", "\\\\")
+                  .replace("\"", "\\\"")
+                  .replace("\n", "\\n")
+                  .replace("\r", "\\r")
+                  .replace("\t", "\\t");
+    }
+}
