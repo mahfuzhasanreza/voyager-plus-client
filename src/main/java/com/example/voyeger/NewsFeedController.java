@@ -34,6 +34,9 @@ public class NewsFeedController {
     private Label upcomingTripsLabel;
 
     @FXML
+    private Label communityLabel;
+
+    @FXML
     private TextArea createPostArea;
 
     @FXML
@@ -77,11 +80,15 @@ public class NewsFeedController {
                     .filter(trip -> trip.getDate().isAfter(java.time.LocalDate.now()))
                     .count();
             upcomingTripsLabel.setText(String.valueOf(upcomingCount));
+
+            // Community count (total users or group members)
+            communityLabel.setText("1.2K");
         } else {
             welcomeLabel.setText("Welcome, Guest! 👋");
             tripCountLabel.setText("0");
             rewardPointsLabel.setText("0");
             upcomingTripsLabel.setText("0");
+            communityLabel.setText("0");
         }
     }
 
