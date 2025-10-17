@@ -13,6 +13,7 @@ public class Main extends Application {
         stage.setTitle("Voyager+ - Travel Together");
         stage.setScene(scene);
         stage.show();
+
     }
 
     public static void main(String[] args) {

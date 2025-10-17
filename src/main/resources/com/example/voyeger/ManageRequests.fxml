@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.voyeger.ManageRequestsController"
+            stylesheets="@TripPlanner.css"
+            prefWidth="600" prefHeight="400">
+
+    <!-- Top: Header -->
+    <top>
+        <VBox styleClass="header-section">
+            <Label text="👥 Manage Join Requests" styleClass="section-title"/>
+            <Label text="Approve or reject requests to join your group trip" styleClass="subtitle-label"/>
+        </VBox>
+    </top>
+
+    <!-- Left: Request List -->
+    <left>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="20" right="10" bottom="20" left="20"/>
+            </padding>
+
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label text="Join Requests" styleClass="field-label"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="🔄" onAction="#handleRefresh" styleClass="icon-btn"/>
+            </HBox>
+
+            <ListView fx:id="requestsListView" VBox.vgrow="ALWAYS" prefWidth="250" styleClass="trip-list"/>
+
+            <Label fx:id="statusLabel" wrapText="true"/>
+
+        </VBox>
+    </left>
+
+    <!-- Center: Request Details -->
+    <center>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="10"/>
+            </padding>
+
+            <Label text="Request Details" styleClass="field-label"/>
+            <TextArea fx:id="requestDetailsArea" editable="false" wrapText="true" VBox.vgrow="ALWAYS" styleClass="details-area"/>
+
+            <HBox spacing="10" alignment="CENTER">
+                <Button fx:id="approveButton" text="✅ Approve" onAction="#handleApprove" styleClass="primary-btn" prefWidth="120"/>
+                <Button fx:id="rejectButton" text="❌ Reject" onAction="#handleReject" styleClass="secondary-btn" prefWidth="120"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="Close" onAction="#handleClose" styleClass="secondary-btn" prefWidth="80"/>
+            </HBox>
+
+        </VBox>
+    </center>
+
+</BorderPane>
+
