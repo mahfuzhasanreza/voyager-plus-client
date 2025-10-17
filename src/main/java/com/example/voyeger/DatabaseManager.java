@@ -233,9 +233,65 @@ public class DatabaseManager {
     }
 
     /**
+     * Save a trip to the database
+     */
+    public boolean saveTrip(Trip trip) {
+        try {
+            String jsonData = String.format(
+                "{\"tripId\":\"%s\",\"title\":\"%s\",\"date\":\"%s\",\"route\":\"%s\",\"budget\":%f,\"description\":\"%s\",\"type\":\"%s\",\"creatorUsername\":\"%s\",\"status\":\"%s\",\"createdAt\":\"%s\",\"isGroupTrip\":%b}",
+                trip.getId(),
+                escapeJson(trip.getTitle()),
+                trip.getDate().toString(),
+                escapeJson(trip.getRoute()),
+                trip.getBudget(),
+                escapeJson(trip.getDescription()),
+                trip.getType().toString(),
+                trip.getCreatorUsername(),
+                trip.getStatus().toString(),
+                java.time.LocalDateTime.now().toString(),
+                trip.isGroupTrip()
+            );
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/trips"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(jsonData))
+                    .build();
+
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.statusCode() == 200) {
+                System.out.println("✅ Trip saved successfully: " + trip.getTitle());
+                return true;
+            } else {
+                System.err.println("❌ Failed to save trip. Status: " + response.statusCode());
+                System.err.println("Response: " + response.body());
+                return false;
+            }
+
+        } catch (Exception e) {
+            System.err.println("❌ Error saving trip: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
      * Close connection
      */
     public void close() {
         System.out.println("Backend connection closed");
+    }
+
+    /**
+     * Helper method to escape JSON special characters
+     */
+    private String escapeJson(String text) {
+        if (text == null) return "";
+        return text.replace("\\", "\\\\")
+                   .replace("\"", "\\\"")
+                   .replace("\n", "\\n")
+                   .replace("\r", "\\r")
+                   .replace("\t", "\\t");
     }
 }

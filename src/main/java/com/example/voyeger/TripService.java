@@ -14,12 +14,14 @@ public class TripService {
     private Map<String, User> users;
     private Map<String, TripPost> tripPosts;
     private User currentUser;
+    private DatabaseManager dbManager;
 
     private TripService() {
         this.trips = new HashMap<>();
         this.groupChats = new HashMap<>();
         this.users = new HashMap<>();
         this.tripPosts = new HashMap<>();
+        this.dbManager = DatabaseManager.getInstance();
 
         // Don't create default users - will be loaded from MongoDB
         this.currentUser = null;
@@ -63,6 +65,10 @@ public class TripService {
         String tripId = UUID.randomUUID().toString();
         Trip trip = new Trip(tripId, title, date, route, budget, description, type, currentUser.getUsername());
         trips.put(tripId, trip);
+
+        // Save trip to database
+        dbManager.saveTrip(trip);
+
         return trip;
     }
 
@@ -76,6 +82,10 @@ public class TripService {
             String postId = UUID.randomUUID().toString();
             TripPost post = new TripPost(postId, trip, currentUser, postContent);
             tripPosts.put(postId, post);
+
+            // Trip is already saved to database in createTrip() or will be saved separately
+            // No need to save tripPost to database - using trips collection only
+
             return post;
         }
         return null;
@@ -101,6 +111,7 @@ public class TripService {
         TripPost post = tripPosts.get(postId);
         if (post != null) {
             post.like();
+            // Likes are stored in-memory only for now
         }
     }
 
@@ -108,6 +119,7 @@ public class TripService {
         TripPost post = tripPosts.get(postId);
         if (post != null) {
             post.unlike();
+            // Unlikes are stored in-memory only for now
         }
     }
 
