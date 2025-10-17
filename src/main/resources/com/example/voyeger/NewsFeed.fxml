@@ -6,87 +6,168 @@
 
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.voyeger.NewsFeedController"
-            stylesheets="@Main.css">
+            stylesheets="@Main.css,@Home.css">
 
-    <!-- Left Sidebar: Create Post -->
-    <left>
-        <VBox spacing="15" styleClass="create-post-sidebar">
-            <padding>
-                <Insets top="20" right="20" bottom="20" left="20"/>
-            </padding>
-
-            <Label text="Create Post" styleClass="sidebar-title"/>
-            <Separator/>
-
-            <Label text="What's your next adventure?" styleClass="field-label"/>
-            <TextArea fx:id="createPostArea" promptText="Share your travel plans with everyone..."
-                      wrapText="true" prefRowCount="4" styleClass="create-post-area"/>
-
-            <Button text="✈ Create Trip Post" onAction="#handleCreatePost"
-                    styleClass="create-post-btn" maxWidth="Infinity"/>
-
-            <Separator/>
-
-            <VBox spacing="8" styleClass="info-box">
-                <Label text="📌 Quick Tips" styleClass="info-title"/>
-                <Label text="• Share your trip details" wrapText="true" styleClass="info-text"/>
-                <Label text="• Create group trips for others to join" wrapText="true" styleClass="info-text"/>
-                <Label text="• Like and comment on posts" wrapText="true" styleClass="info-text"/>
-            </VBox>
-
-        </VBox>
-    </left>
-
-    <!-- Center: News Feed -->
+    <!-- Main Content Area -->
     <center>
-        <VBox spacing="0" styleClass="feed-container">
-            <padding>
-                <Insets top="20" right="20" bottom="20" left="20"/>
-            </padding>
+        <HBox spacing="0" styleClass="home-container">
 
-            <!-- Feed Header -->
-            <HBox alignment="CENTER_LEFT" spacing="15" styleClass="feed-header">
-                <Label text="News Feed" styleClass="feed-title"/>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Button text="🔄 Refresh" onAction="#handleRefreshFeed" styleClass="icon-btn"/>
-            </HBox>
+            <!-- Left Content: Main Feed -->
+            <VBox spacing="0" HBox.hgrow="ALWAYS" styleClass="feed-main-section">
 
-            <Separator>
-                <VBox.margin>
-                    <Insets top="10" bottom="10"/>
-                </VBox.margin>
-            </Separator>
+                <!-- Welcome Banner -->
+                <VBox styleClass="welcome-banner">
+                    <padding>
+                        <Insets top="30" right="30" bottom="30" left="30"/>
+                    </padding>
 
-            <!-- Feed Posts Container (ScrollPane) -->
-            <ScrollPane fitToWidth="true" styleClass="feed-scroll">
-                <VBox fx:id="feedContainer" spacing="15" styleClass="feed-posts">
-                    <!-- Posts will be dynamically loaded here -->
+                    <Label fx:id="welcomeLabel" text="Welcome, User! 👋" styleClass="welcome-title"/>
+
+                    <!-- Stats Cards -->
+                    <HBox spacing="20" styleClass="stats-container">
+                        <VBox.margin>
+                            <Insets top="20"/>
+                        </VBox.margin>
+
+                        <!-- Total Trips -->
+                        <VBox styleClass="stat-card" alignment="CENTER" HBox.hgrow="ALWAYS">
+                            <Label text="🌍" styleClass="stat-icon"/>
+                            <Label fx:id="tripCountLabel" text="0" styleClass="stat-number"/>
+                            <Label text="Total Trips" styleClass="stat-label"/>
+                        </VBox>
+
+                        <!-- Reward Points -->
+                        <VBox styleClass="stat-card" alignment="CENTER" HBox.hgrow="ALWAYS">
+                            <Label text="🏆" styleClass="stat-icon"/>
+                            <Label fx:id="rewardPointsLabel" text="0" styleClass="stat-number"/>
+                            <Label text="Reward Points" styleClass="stat-label"/>
+                        </VBox>
+
+                        <!-- Upcoming Trips -->
+                        <VBox styleClass="stat-card" alignment="CENTER" HBox.hgrow="ALWAYS">
+                            <Label text="📅" styleClass="stat-icon"/>
+                            <Label fx:id="upcomingTripsLabel" text="0" styleClass="stat-number"/>
+                            <Label text="Upcoming Trips" styleClass="stat-label"/>
+                        </VBox>
+
+                    </HBox>
                 </VBox>
-            </ScrollPane>
 
-        </VBox>
-    </center>
+                <!-- Create Post Section -->
+                <VBox styleClass="create-post-section">
+                    <padding>
+                        <Insets top="20" right="30" bottom="20" left="30"/>
+                    </padding>
 
-    <!-- Right Sidebar: Trending/Suggestions -->
-    <right>
-        <VBox spacing="15" styleClass="suggestions-sidebar">
-            <padding>
-                <Insets top="20" right="20" bottom="20" left="20"/>
-            </padding>
+                    <Label text="Share Your Adventure ✈️" styleClass="section-title"/>
 
-            <Label text="🌟 Trending Destinations" styleClass="sidebar-title"/>
-            <Separator/>
+                    <TextArea fx:id="createPostArea"
+                              promptText="What's your next destination? Share your travel plans..."
+                              wrapText="true"
+                              prefRowCount="3"
+                              styleClass="create-post-textarea">
+                        <VBox.margin>
+                            <Insets top="10" bottom="10"/>
+                        </VBox.margin>
+                    </TextArea>
 
-            <VBox spacing="10">
-                <Label text="🗼 Paris, France" styleClass="trending-item"/>
-                <Label text="🏖 Bali, Indonesia" styleClass="trending-item"/>
-                <Label text="🗻 Tokyo, Japan" styleClass="trending-item"/>
-                <Label text="🏔 Swiss Alps" styleClass="trending-item"/>
-                <Label text="🌊 Maldives" styleClass="trending-item"/>
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Button text="✈ Create Trip Post" onAction="#handleCreatePost" styleClass="create-post-btn"/>
+                        <Button text="🔄 Refresh Feed" onAction="#handleRefreshFeed" styleClass="refresh-btn"/>
+                    </HBox>
+                </VBox>
+
+                <!-- Feed Title -->
+                <HBox styleClass="feed-header" alignment="CENTER_LEFT">
+                    <padding>
+                        <Insets top="20" right="30" bottom="10" left="30"/>
+                    </padding>
+                    <Label text="Latest Adventures" styleClass="feed-title"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label text="🔥 Trending Now" styleClass="trending-badge"/>
+                </HBox>
+
+                <!-- Trip Feed (ScrollPane) -->
+                <ScrollPane fx:id="feedScrollPane" fitToWidth="true" styleClass="feed-scroll" VBox.vgrow="ALWAYS">
+                    <VBox fx:id="feedContainer" spacing="15" styleClass="feed-container">
+                        <padding>
+                            <Insets top="10" right="30" bottom="30" left="30"/>
+                        </padding>
+                        <!-- Trip cards will be dynamically loaded here -->
+                    </VBox>
+                </ScrollPane>
+
             </VBox>
 
-        </VBox>
-    </right>
+            <!-- Right Sidebar -->
+            <VBox styleClass="sidebar-section" prefWidth="320" spacing="20">
+                <padding>
+                    <Insets top="30" right="20" bottom="30" left="20"/>
+                </padding>
+
+                <!-- Quick Links -->
+                <VBox fx:id="quickLinksContainer" spacing="12" styleClass="sidebar-card">
+                    <Label text="⚡ Quick Links" styleClass="sidebar-title"/>
+                    <Separator/>
+
+                    <Button text="📋 My Trips" onAction="#handleMyTrips" styleClass="quick-link-btn" maxWidth="Infinity"/>
+                    <Button text="✈ Create Trip" onAction="#handleCreateTrip" styleClass="quick-link-btn" maxWidth="Infinity"/>
+                    <Button text="💰 Expense Calculator" onAction="#handleExpenseCalc" styleClass="quick-link-btn" maxWidth="Infinity"/>
+                    <Button text="📝 Notepad" onAction="#handleNotepad" styleClass="quick-link-btn" maxWidth="Infinity"/>
+                    <Button text="🎯 Quizzes" onAction="#handleQuizzes" styleClass="quick-link-btn" maxWidth="Infinity"/>
+                    <Button text="🎮 Mini Games" onAction="#handleGames" styleClass="quick-link-btn" maxWidth="Infinity"/>
+                </VBox>
+
+                <!-- Notifications -->
+                <VBox fx:id="notificationsContainer" spacing="12" styleClass="sidebar-card">
+                    <Label text="🔔 Notifications" styleClass="sidebar-title"/>
+                    <Separator/>
+
+                    <VBox spacing="8" styleClass="notification-list">
+                        <HBox spacing="10" styleClass="notification-item">
+                            <Label text="👥" styleClass="notif-icon"/>
+                            <VBox spacing="2" HBox.hgrow="ALWAYS">
+                                <Label text="2 Join Requests" styleClass="notif-title"/>
+                                <Label text="Pending approval" styleClass="notif-subtitle"/>
+                            </VBox>
+                        </HBox>
+
+                        <HBox spacing="10" styleClass="notification-item">
+                            <Label text="💬" styleClass="notif-icon"/>
+                            <VBox spacing="2" HBox.hgrow="ALWAYS">
+                                <Label text="New Messages" styleClass="notif-title"/>
+                                <Label text="3 unread chats" styleClass="notif-subtitle"/>
+                            </VBox>
+                        </HBox>
+
+                        <HBox spacing="10" styleClass="notification-item">
+                            <Label text="🏆" styleClass="notif-icon"/>
+                            <VBox spacing="2" HBox.hgrow="ALWAYS">
+                                <Label text="Points Earned!" styleClass="notif-title"/>
+                                <Label text="Complete quizzes to earn more" styleClass="notif-subtitle"/>
+                            </VBox>
+                        </HBox>
+                    </VBox>
+                </VBox>
+
+                <!-- Trending Destinations -->
+                <VBox spacing="12" styleClass="sidebar-card">
+                    <Label text="🌟 Trending Destinations" styleClass="sidebar-title"/>
+                    <Separator/>
+
+                    <VBox spacing="8">
+                        <Label text="🗼 Paris, France" styleClass="trending-destination"/>
+                        <Label text="🏖 Bali, Indonesia" styleClass="trending-destination"/>
+                        <Label text="🗻 Tokyo, Japan" styleClass="trending-destination"/>
+                        <Label text="🏔 Swiss Alps" styleClass="trending-destination"/>
+                        <Label text="🌊 Maldives" styleClass="trending-destination"/>
+                    </VBox>
+                </VBox>
+
+            </VBox>
+
+        </HBox>
+    </center>
 
 </BorderPane>
 
