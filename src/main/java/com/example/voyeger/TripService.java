@@ -98,20 +98,65 @@ public class TripService {
                 .collect(Collectors.toList());
     }
 
-    // Get solo trip posts for news feed
+    // Get solo trip posts for news feed - FETCH FROM BACKEND
     public List<TripPost> getSoloTripPosts() {
-        return tripPosts.values().stream()
-                .filter(post -> post.getTrip().getType() == Trip.TripType.SOLO)
-                .sorted((p1, p2) -> p2.getPostedAt().compareTo(p1.getPostedAt()))
-                .collect(Collectors.toList());
+        try {
+            String excludeUsername = currentUser != null ? currentUser.getUsername() : null;
+            List<Trip> soloTrips = TripApiClient.fetchSoloTrips(excludeUsername);
+
+            System.out.println("✅ Fetched " + soloTrips.size() + " solo trips from backend");
+
+            return convertTripsToTripPosts(soloTrips);
+
+        } catch (Exception e) {
+            System.err.println("❌ Error fetching solo trips: " + e.getMessage());
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
     }
 
-    // Get group trip posts for news feed
+    // Get group trip posts for news feed - FETCH FROM BACKEND
     public List<TripPost> getGroupTripPosts() {
-        return tripPosts.values().stream()
-                .filter(post -> post.getTrip().getType() == Trip.TripType.GROUP)
-                .sorted((p1, p2) -> p2.getPostedAt().compareTo(p1.getPostedAt()))
-                .collect(Collectors.toList());
+        try {
+            String excludeUsername = currentUser != null ? currentUser.getUsername() : null;
+            List<Trip> groupTrips = TripApiClient.fetchGroupTrips(excludeUsername);
+
+            System.out.println("✅ Fetched " + groupTrips.size() + " group trips from backend");
+
+            return convertTripsToTripPosts(groupTrips);
+
+        } catch (Exception e) {
+            System.err.println("❌ Error fetching group trips: " + e.getMessage());
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    // Helper method to convert Trip objects to TripPost objects
+    private List<TripPost> convertTripsToTripPosts(List<Trip> tripList) {
+        List<TripPost> posts = new ArrayList<>();
+
+        for (Trip trip : tripList) {
+            // Get or create user for the trip creator
+            User author = users.get(trip.getCreatorUsername());
+            if (author == null) {
+                // Create a minimal user object if not found
+                author = new User(trip.getCreatorUsername(), trip.getCreatorUsername(), "");
+                users.put(trip.getCreatorUsername(), author);
+            }
+
+            // Create a TripPost with default content
+            String postContent = "Check out my " + trip.getType().toString().toLowerCase() + " trip to " + trip.getRoute() + "!";
+            String postId = trip.getId() + "_post";
+            TripPost post = new TripPost(postId, trip, author, postContent);
+
+            posts.add(post);
+
+            // Cache the trip in local map
+            this.trips.put(trip.getId(), trip);
+        }
+
+        return posts;
     }
 
     // Get user's own posts
