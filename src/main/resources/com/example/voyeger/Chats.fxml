@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.voyeger.ChatsController"
+            styleClass="root" stylesheets="@Chats.css">
+
+    <!-- Top: Include Navbar -->
+    <top>
+        <fx:include source="Navbar.fxml"/>
+    </top>
+
+    <!-- Center: Split view - Chat list on left, Chat interface on right -->
+    <center>
+        <SplitPane dividerPositions="0.3" styleClass="main-split">
+
+            <!-- Left: Chat List -->
+            <VBox styleClass="chat-list-container">
+                <padding>
+                    <Insets top="20" right="15" bottom="20" left="15"/>
+                </padding>
+
+                <HBox alignment="CENTER_LEFT" spacing="10" styleClass="chats-header">
+                    <Label text="💬 Group Chats" styleClass="page-title">
+                        <font>
+                            <Font name="System Bold" size="24"/>
+                        </font>
+                    </Label>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button fx:id="refreshButton" text="🔄" onAction="#handleRefresh"
+                            styleClass="refresh-btn" tooltip="Refresh chats"/>
+                </HBox>
+
+                <Separator styleClass="header-separator">
+                    <VBox.margin>
+                        <Insets top="10" bottom="10"/>
+                    </VBox.margin>
+                </Separator>
+
+                <!-- Search box -->
+                <TextField fx:id="searchField" promptText="🔍 Search chats..."
+                          styleClass="search-field">
+                    <VBox.margin>
+                        <Insets bottom="15"/>
+                    </VBox.margin>
+                </TextField>
+
+                <!-- Chat list -->
+                <ListView fx:id="chatListView" styleClass="chat-list" VBox.vgrow="ALWAYS">
+                    <VBox.margin>
+                        <Insets top="5"/>
+                    </VBox.margin>
+                </ListView>
+
+                <!-- Status label -->
+                <Label fx:id="statusLabel" text="" styleClass="status-label">
+                    <VBox.margin>
+                        <Insets top="10"/>
+                    </VBox.margin>
+                </Label>
+            </VBox>
+
+            <!-- Right: Chat Interface -->
+            <StackPane styleClass="chat-interface-container">
+
+                <!-- Empty state (shown when no chat selected) -->
+                <VBox fx:id="emptyChatState" alignment="CENTER" spacing="15" styleClass="empty-state">
+                    <Label text="💬" styleClass="empty-icon">
+                        <font>
+                            <Font size="60"/>
+                        </font>
+                    </Label>
+                    <Label text="Select a chat to start messaging" styleClass="empty-text">
+                        <font>
+                            <Font size="16"/>
+                        </font>
+                    </Label>
+                    <Label text="Group chats are created when you approve trip join requests"
+                           styleClass="empty-subtext" wrapText="true" textAlignment="CENTER" maxWidth="400">
+                        <font>
+                            <Font size="12"/>
+                        </font>
+                    </Label>
+                </VBox>
+
+                <!-- Chat interface (shown when chat selected) -->
+                <BorderPane fx:id="activeChatPane" visible="false" styleClass="active-chat-pane">
+
+                    <!-- Chat Header -->
+                    <top>
+                        <VBox styleClass="chat-header" spacing="5">
+                            <padding>
+                                <Insets top="15" right="20" bottom="15" left="20"/>
+                            </padding>
+
+                            <HBox alignment="CENTER_LEFT" spacing="10">
+                                <Label fx:id="chatTitleLabel" text="Group Chat" styleClass="chat-title">
+                                    <font>
+                                        <Font name="System Bold" size="18"/>
+                                    </font>
+                                </Label>
+                                <Region HBox.hgrow="ALWAYS"/>
+                                <Button fx:id="chatInfoButton" text="ℹ️" styleClass="info-btn"
+                                        tooltip="Chat info"/>
+                            </HBox>
+
+                            <HBox alignment="CENTER_LEFT" spacing="5">
+                                <Label text="Members:" styleClass="members-label">
+                                    <font>
+                                        <Font size="12"/>
+                                    </font>
+                                </Label>
+                                <Label fx:id="membersLabel" text="Loading..." styleClass="members-text">
+                                    <font>
+                                        <Font size="12"/>
+                                    </font>
+                                </Label>
+                            </HBox>
+                        </VBox>
+                    </top>
+
+                    <!-- Messages Display -->
+                    <center>
+                        <VBox styleClass="messages-container">
+                            <padding>
+                                <Insets top="10" right="10" bottom="10" left="10"/>
+                            </padding>
+
+                            <ScrollPane fx:id="messagesScrollPane" fitToWidth="true" fitToHeight="true"
+                                        styleClass="messages-scroll" VBox.vgrow="ALWAYS">
+                                <VBox fx:id="messagesContainer" spacing="10" styleClass="messages-vbox">
+                                    <padding>
+                                        <Insets top="10" right="10" bottom="10" left="10"/>
+                                    </padding>
+                                </VBox>
+                            </ScrollPane>
+                        </VBox>
+                    </center>
+
+                    <!-- Message Input -->
+                    <bottom>
+                        <VBox styleClass="input-container" spacing="10">
+                            <padding>
+                                <Insets top="15" right="20" bottom="15" left="20"/>
+                            </padding>
+
+                            <HBox spacing="10" alignment="CENTER">
+                                <TextArea fx:id="messageInput" promptText="Type your message..."
+                                          wrapText="true" prefRowCount="2"
+                                          styleClass="message-input" HBox.hgrow="ALWAYS"
+                                          onKeyPressed="#handleKeyPressed"/>
+                                <Button fx:id="sendButton" text="Send" onAction="#handleSend"
+                                        styleClass="send-btn" prefHeight="60">
+                                    <font>
+                                        <Font name="System Bold" size="14"/>
+                                    </font>
+                                </Button>
+                            </HBox>
+
+                            <Label fx:id="chatStatusLabel" text="" styleClass="chat-status-label">
+                                <font>
+                                    <Font size="11"/>
+                                </font>
+                            </Label>
+                        </VBox>
+                    </bottom>
+
+                </BorderPane>
+
+            </StackPane>
+
+        </SplitPane>
+    </center>
+
+</BorderPane>
+

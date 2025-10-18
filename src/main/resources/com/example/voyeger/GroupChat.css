@@ -1,0 +1,96 @@
+/* Group Chat Styles */
+
+.root {
+    -fx-background-color: #f0f2f5;
+}
+
+.chat-header {
+    -fx-background-color: linear-gradient(to bottom, #0084FF, #0066CC);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 2);
+}
+
+.chat-title {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.members-label {
+    -fx-text-fill: rgba(255,255,255,0.8);
+}
+
+.members-text {
+    -fx-text-fill: white;
+}
+
+.close-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-padding: 5 10 5 10;
+}
+
+.close-btn:hover {
+    -fx-background-color: rgba(255,255,255,0.2);
+    -fx-background-radius: 5px;
+}
+
+.messages-container {
+    -fx-background-color: #f0f2f5;
+}
+
+.messages-scroll {
+    -fx-background-color: transparent;
+    -fx-background: #f0f2f5;
+}
+
+.messages-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+.messages-vbox {
+    -fx-background-color: #f0f2f5;
+}
+
+.input-container {
+    -fx-background-color: white;
+    -fx-border-color: #e4e6eb;
+    -fx-border-width: 1 0 0 0;
+}
+
+.message-input {
+    -fx-font-size: 14px;
+    -fx-border-color: #e4e6eb;
+    -fx-border-width: 1;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-padding: 10;
+}
+
+.message-input:focused {
+    -fx-border-color: #0084FF;
+    -fx-border-width: 2;
+}
+
+.send-btn {
+    -fx-background-color: #0084FF;
+    -fx-text-fill: white;
+    -fx-background-radius: 25px;
+    -fx-cursor: hand;
+    -fx-padding: 10 20 10 20;
+}
+
+.send-btn:hover {
+    -fx-background-color: #0066CC;
+}
+
+.send-btn:pressed {
+    -fx-background-color: #0055AA;
+}
+
+.status-label {
+    -fx-text-fill: #65676b;
+    -fx-font-style: italic;
+}
+

@@ -554,4 +554,140 @@ public class TripApiClient {
             return false;
         }
     }
+
+    /**
+     * Approve a join request and automatically create/update group chat
+     * @param tripId The MongoDB ObjectId of the trip
+     * @param requestId The ID of the join request to approve
+     * @param username The username of the trip creator (for authorization)
+     * @return true if request was approved successfully, false otherwise
+     */
+    public static boolean approveJoinRequest(String tripId, String requestId, String username) {
+        try {
+            String url = BASE_URL + "/trips/" + tripId + "/requests/" + requestId + "/respond";
+
+            // Create JSON payload with action "approve"
+            String jsonPayload = "{" +
+                "\"action\":\"approve\"," +
+                "\"responderUsername\":\"" + escapeJson(username) + "\"" +
+                "}";
+
+            System.out.println("📤 Approving join request: " + url);
+            System.out.println("📤 Payload: " + jsonPayload);
+
+            String response = httpPut(url, jsonPayload);
+            System.out.println("✅ Approve request response: " + response);
+
+            return response != null && (response.contains("approved successfully") || response.contains("success"));
+        } catch (Exception e) {
+            System.err.println("❌ Error approving join request: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * Create or update a group chat for a trip (In-Memory only)
+     * @param tripId The MongoDB ObjectId of the trip
+     * @param chatName The name of the group chat
+     * @param members List of usernames who are members of the chat
+     * @return The group chat ID if successful, null otherwise
+     */
+    public static String createOrUpdateGroupChat(String tripId, String chatName, List<String> members) {
+        try {
+            // Group chat is automatically created by backend when request is approved
+            // This method just returns the tripId as chatId since backend uses tripId as chatId
+            System.out.println("✅ Group chat automatically created by backend for trip: " + tripId);
+            return tripId;
+        } catch (Exception e) {
+            System.err.println("❌ Error in createOrUpdateGroupChat: " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * Fetch group chat for a specific trip
+     * @param tripId The MongoDB ObjectId of the trip
+     * @return GroupChat object if found, null otherwise
+     */
+    public static GroupChat fetchGroupChat(String tripId) {
+        try {
+            String url = BASE_URL + "/groupchats/" + tripId;
+            String jsonResponse = httpGet(url);
+            return parseGroupChatFromJson(jsonResponse, tripId);
+        } catch (Exception e) {
+            System.err.println("❌ Error fetching group chat: " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * Parse a group chat from JSON
+     */
+    private static GroupChat parseGroupChatFromJson(String json, String tripId) {
+        try {
+            String chatId = extractJsonValue(json, "_id");
+            if (chatId == null) chatId = extractJsonValue(json, "id");
+
+            String chatName = extractJsonValue(json, "chatName");
+
+            if (chatId == null || chatName == null) {
+                return null;
+            }
+
+            // Parse members array
+            List<String> members = new ArrayList<>();
+            Pattern membersPattern = Pattern.compile("\"members\"\\s*:\\s*\\[([^\\]]+)\\]");
+            Matcher membersMatcher = membersPattern.matcher(json);
+
+            if (membersMatcher.find()) {
+                String membersStr = membersMatcher.group(1);
+                Pattern memberPattern = Pattern.compile("\"([^\"]+)\"");
+                Matcher memberMatcher = memberPattern.matcher(membersStr);
+
+                while (memberMatcher.find()) {
+                    members.add(memberMatcher.group(1));
+                }
+            }
+
+            GroupChat groupChat = new GroupChat(chatId, tripId, chatName, members);
+
+            System.out.println("✅ Parsed group chat: " + chatName + " with " + members.size() + " members");
+            return groupChat;
+
+        } catch (Exception e) {
+            System.err.println("Error in parseGroupChatFromJson: " + e.getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * Send a message to a group chat
+     * @param tripId The trip ID (used as chat ID)
+     * @param sender The username of the sender
+     * @param content The message content
+     * @return true if successful, false otherwise
+     */
+    public static boolean sendChatMessage(String tripId, String sender, String content) {
+        try {
+            String url = BASE_URL + "/groupchats/" + tripId + "/messages";
+
+            String jsonPayload = "{" +
+                "\"sender\":\"" + escapeJson(sender) + "\"," +
+                "\"content\":\"" + escapeJson(content) + "\"" +
+                "}";
+
+            System.out.println("📤 Sending chat message to: " + url);
+
+            String response = httpPost(url, jsonPayload);
+            System.out.println("✅ Message sent successfully");
+
+            return response != null && response.contains("success");
+        } catch (Exception e) {
+            System.err.println("❌ Error sending chat message: " + e.getMessage());
+            return false;
+        }
+    }
 }

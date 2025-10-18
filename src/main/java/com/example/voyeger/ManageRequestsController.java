@@ -65,10 +65,18 @@ public class ManageRequestsController {
         refreshRequests();
         displayRequestDetails(null);
 
-        showAlert("Request Approved",
-            String.format("User '%s' has been added to the trip!\nGroup Chat: %s",
-                selectedRequest.getRequesterUsername(),
-                groupChat != null ? groupChat.getChatName() : "N/A"));
+        // Show success alert directing to Community page
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Request Approved");
+        alert.setHeaderText("✅ User Added to Trip!");
+        alert.setContentText(String.format(
+            "User '%s' has been added to the trip!\n\n" +
+            "Group Chat: %s\n\n" +
+            "💬 Go to Community → Chats from the navbar to start chatting with your group!",
+            selectedRequest.getRequesterUsername(),
+            groupChat != null ? groupChat.getChatName() : "N/A"
+        ));
+        alert.showAndWait();
     }
 
     @FXML

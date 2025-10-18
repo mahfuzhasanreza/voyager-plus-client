@@ -250,21 +250,37 @@ public class TripService {
             return null;
         }
 
-        // Approve the request
+        // Approve the request in backend (backend automatically creates group chat)
+        boolean apiSuccess = TripApiClient.approveJoinRequest(tripId, requestId, currentUser.getUsername());
+        if (!apiSuccess) {
+            System.err.println("❌ Failed to approve join request in database");
+        } else {
+            System.out.println("✅ Join request approved in MongoDB database");
+            System.out.println("✅ Group chat automatically created by backend!");
+        }
+
+        // Approve the request locally
         request.approve();
         trip.approveMember(request.getRequesterUsername());
 
-        // Create or update group chat
-        GroupChat groupChat = groupChats.get(trip.getGroupChatId());
-        if (groupChat == null) {
-            // Create new group chat if it doesn't exist
-            String chatId = UUID.randomUUID().toString();
+        // Fetch the group chat from backend (it was created automatically)
+        GroupChat groupChat = TripApiClient.fetchGroupChat(tripId);
+
+        if (groupChat != null) {
+            // Cache it locally
+            groupChats.put(groupChat.getId(), groupChat);
+            trip.setGroupChatId(groupChat.getId());
+
+            System.out.println("✅ Group chat fetched and cached: " + groupChat.getChatName());
+            System.out.println("✅ Members: " + groupChat.getMembers());
+        } else {
+            // Create local fallback if backend fetch fails
+            String chatId = tripId;
             groupChat = new GroupChat(chatId, tripId, trip.getTitle() + " - Group Chat", trip.getApprovedMembers());
             groupChats.put(chatId, groupChat);
             trip.setGroupChatId(chatId);
-        } else {
-            // Add new member to existing chat
-            groupChat.addMember(request.getRequesterUsername());
+
+            System.out.println("⚠️ Created local group chat as fallback");
         }
 
         return groupChat;
@@ -288,6 +304,13 @@ public class TripService {
         return trips.get(tripId);
     }
 
+    // Cache a trip locally
+    public void cacheTrip(Trip trip) {
+        if (trip != null) {
+            trips.put(trip.getId(), trip);
+        }
+    }
+
     // Get trip post by ID
     public TripPost getTripPost(String postId) {
         return tripPosts.get(postId);
@@ -296,6 +319,13 @@ public class TripService {
     // Get group chat for a trip
     public GroupChat getGroupChat(String chatId) {
         return groupChats.get(chatId);
+    }
+
+    // Cache a group chat locally
+    public void cacheGroupChat(GroupChat chat) {
+        if (chat != null) {
+            groupChats.put(chat.getId(), chat);
+        }
     }
 
     // Get pending join requests for a trip

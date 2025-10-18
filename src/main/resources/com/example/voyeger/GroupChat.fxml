@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.voyeger.GroupChatController"
+            prefWidth="600" prefHeight="500" styleClass="root"
+            stylesheets="@GroupChat.css">
+
+    <!-- Top: Chat Header -->
+    <top>
+        <VBox styleClass="chat-header" spacing="5">
+            <padding>
+                <Insets top="15" right="20" bottom="15" left="20"/>
+            </padding>
+
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label fx:id="chatTitleLabel" text="Group Chat" styleClass="chat-title">
+                    <font>
+                        <Font name="System Bold" size="18"/>
+                    </font>
+                </Label>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button fx:id="closeButton" text="✕" onAction="#handleClose" styleClass="close-btn"/>
+            </HBox>
+
+            <HBox alignment="CENTER_LEFT" spacing="5">
+                <Label text="Members:" styleClass="members-label">
+                    <font>
+                        <Font size="12"/>
+                    </font>
+                </Label>
+                <Label fx:id="membersLabel" text="Loading..." styleClass="members-text">
+                    <font>
+                        <Font size="12"/>
+                    </font>
+                </Label>
+            </HBox>
+        </VBox>
+    </top>
+
+    <!-- Center: Messages Display -->
+    <center>
+        <VBox styleClass="messages-container">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+
+            <ScrollPane fx:id="messagesScrollPane" fitToWidth="true" fitToHeight="true"
+                        styleClass="messages-scroll" VBox.vgrow="ALWAYS">
+                <VBox fx:id="messagesContainer" spacing="10" styleClass="messages-vbox">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10"/>
+                    </padding>
+                </VBox>
+            </ScrollPane>
+        </VBox>
+    </center>
+
+    <!-- Bottom: Message Input -->
+    <bottom>
+        <VBox styleClass="input-container" spacing="10">
+            <padding>
+                <Insets top="15" right="20" bottom="15" left="20"/>
+            </padding>
+
+            <HBox spacing="10" alignment="CENTER">
+                <TextArea fx:id="messageInput" promptText="Type your message..."
+                          wrapText="true" prefRowCount="2"
+                          styleClass="message-input" HBox.hgrow="ALWAYS"
+                          onKeyPressed="#handleKeyPressed"/>
+                <Button fx:id="sendButton" text="Send" onAction="#handleSend"
+                        styleClass="send-btn" prefHeight="60">
+                    <font>
+                        <Font name="System Bold" size="14"/>
+                    </font>
+                </Button>
+            </HBox>
+
+            <Label fx:id="statusLabel" text="" styleClass="status-label">
+                <font>
+                    <Font size="11"/>
+                </font>
+            </Label>
+        </VBox>
+    </bottom>
+
+</BorderPane>
