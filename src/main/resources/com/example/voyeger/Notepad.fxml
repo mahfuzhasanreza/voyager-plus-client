@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.voyeger.NotepadController">
+    <top>
+        <ToolBar>
+            <Label text="📝 Notepad: Save packing lists, etc." style="-fx-font-size: 18; -fx-font-weight: bold;" />
+        </ToolBar>
+    </top>
+    <center>
+        <SplitPane orientation="HORIZONTAL">
+            <VBox spacing="8" prefWidth="220">
+                <Label text="Your Notes" style="-fx-font-size: 14; -fx-font-weight: bold;" />
+                <ListView fx:id="notesListView" prefHeight="400" />
+                <Button text="New Note" onAction="#onNewNote" />
+                <Button text="Delete Note" onAction="#onDeleteNote" />
+            </VBox>
+            <VBox spacing="8" padding="10">
+                <TextField fx:id="titleField" promptText="Title" />
+                <TextArea fx:id="contentArea" promptText="Write your packing list or notes here..." prefRowCount="15" />
+                <HBox spacing="10">
+                    <Button text="Save" onAction="#onSaveNote" />
+                    <Button text="Update" onAction="#onUpdateNote" />
+                </HBox>
+            </VBox>
+        </SplitPane>
+    </center>
+</BorderPane>
+

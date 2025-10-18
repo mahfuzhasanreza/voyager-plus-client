@@ -30,18 +30,6 @@
         <!-- Home -->
         <Button fx:id="homeBtn" text="🏠 Home" onAction="#handleHome" styleClass="nav-btn"/>
 
-        <!-- Trips (Dropdown) -->
-        <Button fx:id="tripsBtn" text="🌍 Trips" onAction="#handleTrips" styleClass="nav-btn nav-dropdown"/>
-
-        <!-- Hotel Booking -->
-        <Button fx:id="hotelBtn" text="🏨 Hotel" onAction="#handleHotel" styleClass="nav-btn"/>
-
-        <!-- Tools (Dropdown) -->
-        <Button fx:id="toolsBtn" text="🧰 Tools" onAction="#handleTools" styleClass="nav-btn nav-dropdown"/>
-
-        <!-- Community (Dropdown) -->
-        <Button fx:id="communityBtn" text="💬 Community" onAction="#handleCommunity" styleClass="nav-btn nav-dropdown"/>
-
         <!-- Notifications Button with Badge -->
         <StackPane>
             <Button text="🔔" onAction="#handleNotifications" styleClass="nav-btn"
@@ -54,12 +42,6 @@
                 </StackPane.margin>
             </Label>
         </StackPane>
-
-        <!-- Learn & Fun (Dropdown) -->
-        <Button fx:id="learnBtn" text="🎯 Learn" onAction="#handleLearn" styleClass="nav-btn nav-dropdown"/>
-
-        <!-- Map Explorer -->
-        <Button fx:id="mapBtn" text="🗺️ Map" onAction="#handleMap" styleClass="nav-btn"/>
 
         <!-- Profile (Dropdown) -->
         <Button fx:id="profileBtn" text="👤 Profile" onAction="#handleProfile" styleClass="nav-btn nav-dropdown"/>

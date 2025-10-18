@@ -17,7 +17,7 @@ public class NavbarController {
     private Label brandLabel;
 
     @FXML
-    private Button homeBtn, tripsBtn, hotelBtn, toolsBtn, communityBtn, learnBtn, mapBtn, profileBtn;
+    private Button homeBtn, profileBtn;
 
     @FXML
     private Label notificationBadge;
@@ -70,23 +70,11 @@ public class NavbarController {
     private void highlightCurrentPage(String page) {
         // Remove active class from all buttons
         homeBtn.getStyleClass().remove("active-nav");
-        tripsBtn.getStyleClass().remove("active-nav");
-        hotelBtn.getStyleClass().remove("active-nav");
-        toolsBtn.getStyleClass().remove("active-nav");
-        communityBtn.getStyleClass().remove("active-nav");
-        learnBtn.getStyleClass().remove("active-nav");
-        mapBtn.getStyleClass().remove("active-nav");
         profileBtn.getStyleClass().remove("active-nav");
 
         // Add active class to current page
         switch (page.toLowerCase()) {
             case "home" -> homeBtn.getStyleClass().add("active-nav");
-            case "trips" -> tripsBtn.getStyleClass().add("active-nav");
-            case "hotel" -> hotelBtn.getStyleClass().add("active-nav");
-            case "tools" -> toolsBtn.getStyleClass().add("active-nav");
-            case "community" -> communityBtn.getStyleClass().add("active-nav");
-            case "learn" -> learnBtn.getStyleClass().add("active-nav");
-            case "map" -> mapBtn.getStyleClass().add("active-nav");
             case "profile" -> profileBtn.getStyleClass().add("active-nav");
         }
     }
@@ -97,36 +85,6 @@ public class NavbarController {
     }
 
     @FXML
-    private void handleTrips(ActionEvent event) {
-        showTripsMenu(event);
-    }
-
-    @FXML
-    private void handleHotel(ActionEvent event) {
-        navigateToPage("HotelBooking.fxml", "Hotel Booking - Voyager+", "hotel");
-    }
-
-    @FXML
-    private void handleTools(ActionEvent event) {
-        showToolsMenu(event);
-    }
-
-    @FXML
-    private void handleCommunity(ActionEvent event) {
-        showCommunityMenu(event);
-    }
-
-    @FXML
-    private void handleLearn(ActionEvent event) {
-        showLearnMenu(event);
-    }
-
-    @FXML
-    private void handleMap(ActionEvent event) {
-        navigateToPage("MapExplorer.fxml", "Map Explorer - Voyager+", "map");
-    }
-
-    @FXML
     private void handleProfile(ActionEvent event) {
         showProfileMenu(event);
     }
@@ -134,64 +92,6 @@ public class NavbarController {
     @FXML
     private void handleNotifications(ActionEvent event) {
         navigateToPage("Notifications.fxml", "Notifications - Voyager+", "home");
-    }
-
-    private void showTripsMenu(ActionEvent event) {
-        ContextMenu menu = new ContextMenu();
-
-        MenuItem createTrip = new MenuItem("✈ Create Trip");
-        createTrip.setOnAction(e -> navigateToPage("TripPlanner.fxml", "Create Trip - Voyager+", "trips"));
-
-        MenuItem myTrips = new MenuItem("📋 My Trips");
-        myTrips.setOnAction(e -> navigateToPage("MyTrips.fxml", "My Trips - Voyager+", "trips"));
-
-        MenuItem exploreTrips = new MenuItem("🔍 Explore Trips");
-        exploreTrips.setOnAction(e -> navigateToPage("ExploreTrips.fxml", "Explore Trips - Voyager+", "trips"));
-
-        menu.getItems().addAll(createTrip, myTrips, exploreTrips);
-        menu.show((Node) event.getSource(), javafx.geometry.Side.BOTTOM, 0, 0);
-    }
-
-    private void showToolsMenu(ActionEvent event) {
-        ContextMenu menu = new ContextMenu();
-
-        MenuItem expenseCalc = new MenuItem("💰 Expense Calculator");
-        expenseCalc.setOnAction(e -> navigateToPage("ExpenseCalculator.fxml", "Expense Calculator - Voyager+", "tools"));
-
-        MenuItem notepad = new MenuItem("📝 Notepad");
-        notepad.setOnAction(e -> navigateToPage("Notepad.fxml", "Notepad - Voyager+", "tools"));
-
-        MenuItem calculator = new MenuItem("🔢 Calculator");
-        calculator.setOnAction(e -> navigateToPage("Calculator.fxml", "Calculator - Voyager+", "tools"));
-
-        menu.getItems().addAll(expenseCalc, notepad, calculator);
-        menu.show((Node) event.getSource(), javafx.geometry.Side.BOTTOM, 0, 0);
-    }
-
-    private void showCommunityMenu(ActionEvent event) {
-        ContextMenu menu = new ContextMenu();
-
-        MenuItem chats = new MenuItem("💬 Chats");
-        chats.setOnAction(e -> navigateToPage("Chats.fxml", "Chats - Voyager+", "community"));
-
-        MenuItem friends = new MenuItem("👥 Friends");
-        friends.setOnAction(e -> navigateToPage("Friends.fxml", "Friends - Voyager+", "community"));
-
-        menu.getItems().addAll(chats, friends);
-        menu.show((Node) event.getSource(), javafx.geometry.Side.BOTTOM, 0, 0);
-    }
-
-    private void showLearnMenu(ActionEvent event) {
-        ContextMenu menu = new ContextMenu();
-
-        MenuItem quizzes = new MenuItem("🎯 Quizzes");
-        quizzes.setOnAction(e -> navigateToPage("Quizzes.fxml", "Quizzes - Voyager+", "learn"));
-
-        MenuItem games = new MenuItem("🎮 Mini Games");
-        games.setOnAction(e -> navigateToPage("MiniGames.fxml", "Mini Games - Voyager+", "learn"));
-
-        menu.getItems().addAll(quizzes, games);
-        menu.show((Node) event.getSource(), javafx.geometry.Side.BOTTOM, 0, 0);
     }
 
     private void showProfileMenu(ActionEvent event) {
