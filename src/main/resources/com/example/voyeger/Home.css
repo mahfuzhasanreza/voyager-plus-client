@@ -1,6 +1,666 @@
+/*!* ==================== MODERN HOME PAGE STYLES ==================== *!*/
+
+/*!* Smooth Scrolling *!*/
+/*.main-scroll-pane {*/
+/*    -fx-background-color: transparent;*/
+/*    -fx-background: transparent;*/
+/*}*/
+
+/*.main-scroll-pane > .viewport {*/
+/*    -fx-background-color: #f5f7fa;*/
+/*}*/
+
+/*.main-scroll-pane > .scroll-bar:vertical {*/
+/*    -fx-background-color: transparent;*/
+/*    -fx-pref-width: 10px;*/
+/*}*/
+
+/*.main-scroll-pane > .scroll-bar:vertical > .thumb {*/
+/*    -fx-background-color: linear-gradient(to bottom, #667eea, #764ba2);*/
+/*    -fx-background-radius: 5px;*/
+/*    -fx-background-insets: 2;*/
+/*}*/
+
+/*.main-scroll-pane > .scroll-bar:vertical > .increment-button,*/
+/*.main-scroll-pane > .scroll-bar:vertical > .decrement-button {*/
+/*    -fx-background-color: transparent;*/
+/*    -fx-padding: 0;*/
+/*}*/
+
+/*!* ==================== MAIN LAYOUT ==================== *!*/
+/*.home-container {*/
+/*    -fx-background-color: #f5f7fa;*/
+/*}*/
+
+/*.feed-main-section {*/
+/*    -fx-background-color: transparent;*/
+/*}*/
+
+/*!* ==================== HERO WELCOME BANNER ==================== *!*/
+/*.welcome-banner-hero {*/
+/*    -fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);*/
+/*    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 15, 0, 0, 5);*/
+/*    -fx-background-radius: 0 0 30 30;*/
+/*}*/
+
+/*.hero-content {*/
+/*    -fx-alignment: CENTER_LEFT;*/
+/*}*/
+
+/*.welcome-title-hero {*/
+/*    -fx-font-size: 38px;*/
+/*    -fx-font-weight: bold;*/
+/*    -fx-text-fill: white;*/
+/*    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0, 0, 3);*/
+/*}*/
+
+/*.welcome-subtitle {*/
+/*    -fx-font-size: 16px;*/
+/*    -fx-text-fill: rgba(255, 255, 255, 0.95);*/
+/*    -fx-font-weight: 500;*/
+/*}*/
+
+/*!* ==================== ENHANCED STATS CARDS ==================== *!*/
+/*.stats-container-enhanced {*/
+/*    -fx-spacing: 25;*/
+/*}*/
+
+/*.stat-card-enhanced {*/
+/*    -fx-background-color: white;*/
+/*    -fx-background-radius: 20;*/
+/*    -fx-padding: 30 20;*/
+/*    -fx-spacing: 10;*/
+/*    -fx-cursor: hand;*/
+/*    -fx-border-color: rgba(255, 255, 255, 0.3);*/
+/*    -fx-border-width: 2;*/
+/*    -fx-border-radius: 20;*/
+/*}*/
+
+/*.stat-card-enhanced:hover {*/
+/*    -fx-scale-x: 1.08;*/
+/*    -fx-scale-y: 1.08;*/
+/*    -fx-background-color: #ffffff;*/
+/*}*/
+
+/*.stat-icon-enhanced {*/
+/*    -fx-font-size: 48px;*/
+/*    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);*/
+/*}*/
+
+/*.stat-number-enhanced {*/
+/*    -fx-font-size: 36px;*/
+/*    -fx-font-weight: bold;*/
+/*    -fx-text-fill: #2c3e50;*/
+/*}*/
+
+/*.stat-label-enhanced {*/
+/*    -fx-font-size: 14px;*/
+/*    -fx-text-fill: #7f8c8d;*/
+/*    -fx-font-weight: 600;*/
+/*}*/
+
+/*.stat-action {*/
+/*    -fx-font-size: 11px;*/
+/*    -fx-text-fill: #667eea;*/
+/*    -fx-font-weight: 700;*/
+/*    -fx-cursor: hand;*/
+/*}*/
+
+/*.stat-action:hover {*/
+/*    -fx-text-fill: #5568d3;*/
+/*    -fx-underline: true;*/
+/*}*/
+
+/*!* ==================== MODERN CREATE POST SECTION ==================== *!*/
+/*.create-post-section-modern {*/
+/*    -fx-background-color: white;*/
+/*    -fx-border-color: #e8ecf0;*/
+/*    -fx-border-width: 0 0 1 0;*/
+/*    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.03), 5, 0, 0, 2);*/
+/*}*/
+
+/*.section-icon {*/
+/*    -fx-font-size: 28px;*/
+/*}*/
+
+/*.section-title-modern {*/
+/*    -fx-font-size: 20px;*/
+/*    -fx-font-weight: bold;*/
+/*    -fx-text-fill: #2c3e50;*/
+/*}*/
+
+/*.section-subtitle {*/
+/*    -fx-font-size: 13px;*/
+/*    -fx-text-fill: #95a5a6;*/
+/*}*/
+
+/*.create-post-textarea-modern {*/
+/*    -fx-background-color: #f8f9fc;*/
+/*    -fx-border-color: #e0e4e9;*/
+/*    -fx-border-radius: 15;*/
+/*    -fx-background-radius: 15;*/
+/*    -fx-padding: 16;*/
+/*    -fx-font-size: 15px;*/
+/*    -fx-text-fill: #2c3e50;*/
+/*}*/
+
+/*.create-post-textarea-modern:focused {*/
+/*    -fx-border-color: #667eea;*/
+/*    -fx-border-width: 2;*/
+/*    -fx-background-color: white;*/
+/*    -fx-effect: dropshadow(three-pass-box, rgba(102, 126, 234, 0.2), 10, 0, 0, 3);*/
+/*}*/
+
+/*.create-post-btn-modern {*/
+/*    -fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);*/
+/*    -fx-text-fill: white;*/
+/*    -fx-font-size: 15px;*/
+/*    -fx-font-weight: bold;*/
+/*    -fx-padding: 14 28;*/
+/*    -fx-background-radius: 12;*/
+/*    -fx-cursor: hand;*/
+/*    -fx-effect: dropshadow(three-pass-box, rgba(102, 126, 234, 0.4), 8, 0, 0, 3);*/
+/*}*/
+
+/*.create-post-btn-modern:hover {*/
+/*    -fx-background-color: linear-gradient(135deg, #5568d3 0%, #653a8b 100%);*/
+/*    -fx-scale-x: 1.03;*/
+/*    -fx-scale-y: 1.03;*/
+/*}*/
+
+/*.secondary-btn-modern {*/
+/*    -fx-background-color: #f0f3f7;*/
+/*    -fx-text-fill: #5a6c7d;*/
+/*    -fx-font-size: 14px;*/
+/*    -fx-font-weight: 600;*/
+/*    -fx-padding: 14 24;*/
+/*    -fx-background-radius: 12;*/
+/*    -fx-cursor: hand;*/
+/*}*/
+
+/*.secondary-btn-modern:hover {*/
+/*    -fx-background-color: #e4e9f0;*/
+/*    -fx-text-fill: #667eea;*/
+/*}*/
+
+/*.icon-btn-modern {*/
+/*    -fx-background-color: #f0f3f7;*/
+/*    -fx-text-fill: #5a6c7d;*/
+/*    -fx-font-size: 18px;*/
+/*    -fx-min-width: 44px;*/
+/*    -fx-min-height: 44px;*/
+/*    -fx-background-radius: 50%;*/
+/*    -fx-cursor: hand;*/
+/*}*/
+
+/*.icon-btn-modern:hover {*/
+/*    -fx-background-color: #667eea;*/
+/*    -fx-text-fill: white;*/
+/*    -fx-rotate: 180;*/
+/*}*/
+
+/*!* ==================== MODERN FEED HEADER ==================== *!*/
+/*.feed-header-modern {*/
+/*    -fx-background-color: transparent;*/
+/*    -fx-padding: 25 40 15 40;*/
+/*}*/
+
+/*.feed-title-modern {*/
+/*    -fx-font-size: 26px;*/
+/*    -fx-font-weight: bold;*/
+/*    -fx-text-fill: #2c3e50;*/
+/*}*/
+
+/*.feed-subtitle {*/
+/*    -fx-font-size: 14px;*/
+/*    -fx-text-fill: #95a5a6;*/
+/*}*/
+
+/*!* Filter Buttons *!*/
+/*.filter-btn {*/
+/*    -fx-background-color: white;*/
+/*    -fx-text-fill: #5a6c7d;*/
+/*    -fx-font-size: 13px;*/
+/*    -fx-font-weight: 600;*/
+/*    -fx-padding: 10 20;*/
+/*    -fx-background-radius: 20;*/
+/*    -fx-cursor: hand;*/
+/*    -fx-border-color: #e0e4e9;*/
+/*    -fx-border-width: 1;*/
+/*    -fx-border-radius: 20;*/
+/*}*/
+
+/*.filter-btn:hover {*/
+/*    -fx-background-color: #f8f9fc;*/
+/*    -fx-border-color: #667eea;*/
+/*    -fx-text-fill: #667eea;*/
+/*}*/
+
+/*.filter-active {*/
+/*    -fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);*/
+/*    -fx-text-fill: white;*/
+/*    -fx-border-color: transparent;*/
+/*}*/
+
+/*!* ==================== FEED CONTAINER ==================== *!*/
+/*.feed-container-modern {*/
+/*    -fx-background-color: transparent;*/
+/*}*/
+
+/*!* ==================== ENHANCED TRIP CARDS ==================== *!*/
+/*.trip-card {*/
+/*    -fx-background-color: white;*/
+/*    -fx-background-radius: 20;*/
+/*    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.08), 10, 0, 0, 4);*/
+/*    -fx-cursor: hand;*/
+/*    -fx-border-color: rgba(230, 235, 240, 0.8);*/
+/*    -fx-border-width: 1;*/
+/*    -fx-border-radius: 20;*/
+/*}*/
+
+/*.trip-card:hover {*/
+/*    -fx-effect: dropshadow(three-pass-box, rgba(102, 126, 234, 0.3), 20, 0, 0, 8);*/
+/*    -fx-translate-y: -5;*/
+/*}*/
+
+/*!* Card Header *!*/
+/*.avatar-circle {*/
+/*    -fx-min-width: 52px;*/
+/*    -fx-min-height: 52px;*/
+/*    -fx-max-width: 52px;*/
+/*    -fx-max-height: 52px;*/
+/*    -fx-background-color: linear-gradient(135deg, #667eea, #764ba2);*/
+/*    -fx-text-fill: white;*/
+/*    -fx-font-size: 22px;*/
+/*    -fx-font-weight: bold;*/
+/*    -fx-alignment: center;*/
+/*    -fx-background-radius: 50%;*/
+/*    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.4), 8, 0, 0, 2);*/
+/*}*/
+
+/*.post-author {*/
+/*    -fx-font-size: 17px;*/
+/*    -fx-font-weight: bold;*/
+/*    -fx-text-fill: #2c3e50;*/
+/*}*/
+
+/*.post-meta {*/
+/*    -fx-font-size: 13px;*/
+/*    -fx-text-fill: #95a5a6;*/
+/*}*/
+
+/*.trip-type-badge {*/
+/*    -fx-font-size: 12px;*/
+/*    -fx-font-weight: bold;*/
+/*    -fx-padding: 8 16;*/
+/*    -fx-background-radius: 15;*/
+/*}*/
+
+/*.group-badge {*/
+/*    -fx-background-color: #e7f3ff;*/
+/*    -fx-text-fill: #1877f2;*/
+/*}*/
+
+/*.solo-badge {*/
+/*    -fx-background-color: #fff3e0;*/
+/*    -fx-text-fill: #f57c00;*/
+/*}*/
+
+/*!* Post Content *!*/
+/*.post-content {*/
+/*    -fx-font-size: 16px;*/
+/*    -fx-text-fill: #2c3e50;*/
+/*    -fx-line-spacing: 2;*/
+/*}*/
+
+/*!* Trip Details Section *!*/
+/*.trip-details-section {*/
+/*    -fx-background-color: #f8f9fc;*/
+/*    -fx-background-radius: 15;*/
+/*    -fx-border-color: #e8ecf0;*/
+/*    -fx-border-width: 1;*/
+/*    -fx-border-radius: 15;*/
+/*}*/
+
+/*.trip-detail-title {*/
+/*    -fx-font-size: 22px;*/
+/*    -fx-font-weight: bold;*/
+/*    -fx-text-fill: #2c3e50;*/
+/*}*/
+
+/*.trip-detail-info {*/
+/*    -fx-font-size: 15px;*/
+/*    -fx-text-fill: #495057;*/
+/*    -fx-font-weight: 500;*/
+/*}*/
+
+/*.trip-description {*/
+/*    -fx-font-size: 14px;*/
+/*    -fx-text-fill: #6c757d;*/
+/*    -fx-line-spacing: 1.6;*/
+/*}*/
+
+/*!* Stats Bar *!*/
+/*.stats-bar {*/
+/*    -fx-padding: 10 0;*/
+/*}*/
+
+/*.stat-label {*/
+/*    -fx-font-size: 14px;*/
+/*    -fx-text-fill: #7f8c8d;*/
+/*    -fx-font-weight: 600;*/
+/*}*/
+
+/*!* Action Buttons *!*/
+/*.action-buttons {*/
+/*    -fx-padding: 10 0 0 0;*/
+/*}*/
+
+/*.action-btn {*/
+/*    -fx-background-color: #f8f9fc;*/
+/*    -fx-text-fill: #5a6c7d;*/
+/*    -fx-font-size: 14px;*/
+/*    -fx-font-weight: 600;*/
+/*    -fx-padding: 12 20;*/
+/*    -fx-background-radius: 10;*/
+/*    -fx-border-color: transparent;*/
+/*    -fx-cursor: hand;*/
+/*}*/
+
+/*.action-btn:hover {*/
+/*    -fx-background-color: #667eea;*/
+/*    -fx-text-fill: white;*/
+/*    -fx-scale-x: 1.05;*/
+/*    -fx-scale-y: 1.05;*/
+/*}*/
+
+/*.action-btn-primary {*/
+/*    -fx-background-color: linear-gradient(135deg, #667eea, #764ba2);*/
+/*    -fx-text-fill: white;*/
+/*}*/
+
+/*.action-btn-primary:hover {*/
+/*    -fx-background-color: linear-gradient(135deg, #5568d3, #653a8b);*/
+/*    -fx-effect: dropshadow(three-pass-box, rgba(102, 126, 234, 0.4), 10, 0, 0, 4);*/
+/*}*/
+
+/*!* ==================== MODERN SIDEBAR ==================== *!*/
+/*.sidebar-section-modern {*/
+/*    -fx-background-color: #fafbfc;*/
+/*}*/
+
+/*.sidebar-card-modern {*/
+/*    -fx-background-color: white;*/
+/*    -fx-background-radius: 18;*/
+/*    -fx-padding: 24;*/
+/*}*/
+
+/*.sidebar-icon {*/
+/*    -fx-font-size: 24px;*/
+/*}*/
+
+/*.sidebar-title-modern {*/
+/*    -fx-font-size: 18px;*/
+/*    -fx-font-weight: bold;*/
+/*    -fx-text-fill: #2c3e50;*/
+/*}*/
+
+/*.sidebar-separator {*/
+/*    -fx-background-color: #e8ecf0;*/
+/*    -fx-padding: 0.5;*/
+/*}*/
+
+/*!* Quick Links *!*/
+/*.quick-link-btn-modern {*/
+/*    -fx-background-color: #f8f9fc;*/
+/*    -fx-text-fill: #5a6c7d;*/
+/*    -fx-font-size: 14px;*/
+/*    -fx-font-weight: 600;*/
+/*    -fx-padding: 14 18;*/
+/*    -fx-background-radius: 12;*/
+/*    -fx-alignment: CENTER_LEFT;*/
+/*    -fx-cursor: hand;*/
+/*    -fx-border-color: transparent;*/
+/*}*/
+
+/*.quick-link-btn-modern:hover {*/
+/*    -fx-background-color: #667eea;*/
+/*    -fx-text-fill: white;*/
+/*    -fx-translate-x: 5;*/
+/*    -fx-effect: dropshadow(three-pass-box, rgba(102, 126, 234, 0.3), 10, 0, 0, 3);*/
+/*}*/
+
+/*.quick-link-primary {*/
+/*    -fx-background-color: linear-gradient(135deg, #667eea, #764ba2);*/
+/*    -fx-text-fill: white;*/
+/*}*/
+
+/*.quick-link-primary:hover {*/
+/*    -fx-background-color: linear-gradient(135deg, #5568d3, #653a8b);*/
+/*}*/
+
+/*!* Notifications *!*/
+/*.notification-badge {*/
+/*    -fx-background-color: #ff4757;*/
+/*    -fx-text-fill: white;*/
+/*    -fx-font-size: 11px;*/
+/*    -fx-font-weight: bold;*/
+/*    -fx-min-width: 24px;*/
+/*    -fx-min-height: 24px;*/
+/*    -fx-background-radius: 50%;*/
+/*    -fx-alignment: center;*/
+/*}*/
+
+/*.notification-list-modern {*/
+/*    -fx-spacing: 12;*/
+/*}*/
+
+/*.notification-item-modern {*/
+/*    -fx-background-color: #f8f9fc;*/
+/*    -fx-background-radius: 12;*/
+/*    -fx-padding: 14;*/
+/*    -fx-cursor: hand;*/
+/*    -fx-border-color: transparent;*/
+/*    -fx-border-width: 1;*/
+/*    -fx-border-radius: 12;*/
+/*}*/
+
+/*.notification-item-modern:hover {*/
+/*    -fx-background-color: white;*/
+/*    -fx-border-color: #667eea;*/
+/*    -fx-effect: dropshadow(three-pass-box, rgba(102, 126, 234, 0.15), 8, 0, 0, 2);*/
+/*}*/
+
+/*.notification-icon-wrapper {*/
+/*    -fx-background-color: white;*/
+/*    -fx-min-width: 40px;*/
+/*    -fx-min-height: 40px;*/
+/*    -fx-background-radius: 50%;*/
+/*    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);*/
+/*}*/
+
+/*.notif-icon-modern {*/
+/*    -fx-font-size: 20px;*/
+/*}*/
+
+/*.notif-title-modern {*/
+/*    -fx-font-size: 14px;*/
+/*    -fx-font-weight: bold;*/
+/*    -fx-text-fill: #2c3e50;*/
+/*}*/
+
+/*.notif-subtitle-modern {*/
+/*    -fx-font-size: 13px;*/
+/*    -fx-text-fill: #7f8c8d;*/
+/*}*/
+
+/*.notif-time {*/
+/*    -fx-font-size: 11px;*/
+/*    -fx-text-fill: #95a5a6;*/
+/*    -fx-font-style: italic;*/
+/*}*/
+
+/*.view-all-btn {*/
+/*    -fx-background-color: transparent;*/
+/*    -fx-text-fill: #667eea;*/
+/*    -fx-font-size: 13px;*/
+/*    -fx-font-weight: 700;*/
+/*    -fx-padding: 10;*/
+/*    -fx-cursor: hand;*/
+/*    -fx-border-color: #667eea;*/
+/*    -fx-border-width: 1;*/
+/*    -fx-border-radius: 8;*/
+/*    -fx-background-radius: 8;*/
+/*}*/
+
+/*.view-all-btn:hover {*/
+/*    -fx-background-color: #667eea;*/
+/*    -fx-text-fill: white;*/
+/*}*/
+
+/*!* Trending Destinations *!*/
+/*.trending-destination-modern {*/
+/*    -fx-background-color: #f8f9fc;*/
+/*    -fx-background-radius: 12;*/
+/*    -fx-padding: 14;*/
+/*    -fx-cursor: hand;*/
+/*    -fx-border-color: transparent;*/
+/*    -fx-border-width: 1;*/
+/*    -fx-border-radius: 12;*/
+/*}*/
+
+/*.trending-destination-modern:hover {*/
+/*    -fx-background-color: white;*/
+/*    -fx-border-color: #667eea;*/
+/*    -fx-effect: dropshadow(three-pass-box, rgba(102, 126, 234, 0.2), 10, 0, 0, 3);*/
+/*    -fx-translate-x: 3;*/
+/*}*/
+
+/*.destination-icon {*/
+/*    -fx-font-size: 28px;*/
+/*}*/
+
+/*.destination-name {*/
+/*    -fx-font-size: 15px;*/
+/*    -fx-font-weight: bold;*/
+/*    -fx-text-fill: #2c3e50;*/
+/*}*/
+
+/*.destination-count {*/
+/*    -fx-font-size: 12px;*/
+/*    -fx-text-fill: #95a5a6;*/
+/*}*/
+
+/*.trending-icon {*/
+/*    -fx-font-size: 20px;*/
+/*}*/
+
+/*.explore-btn {*/
+/*    -fx-background-color: #f8f9fc;*/
+/*    -fx-text-fill: #667eea;*/
+/*    -fx-font-size: 13px;*/
+/*    -fx-font-weight: 700;*/
+/*    -fx-padding: 12;*/
+/*    -fx-cursor: hand;*/
+/*    -fx-background-radius: 10;*/
+/*}*/
+
+/*.explore-btn:hover {*/
+/*    -fx-background-color: #667eea;*/
+/*    -fx-text-fill: white;*/
+/*}*/
+
+/*!* Travel Tips Card *!*/
+/*.tips-card {*/
+/*    -fx-background-color: linear-gradient(135deg, #ffeef8 0%, #f3e7ff 100%);*/
+/*    -fx-border-color: rgba(102, 126, 234, 0.2);*/
+/*    -fx-border-width: 1;*/
+/*    -fx-border-radius: 18;*/
+/*}*/
+
+/*.tip-content {*/
+/*    -fx-font-size: 14px;*/
+/*    -fx-text-fill: #2c3e50;*/
+/*    -fx-line-spacing: 1.6;*/
+/*    -fx-font-style: italic;*/
+/*}*/
+
+/*.tip-author {*/
+/*    -fx-font-size: 12px;*/
+/*    -fx-text-fill: #667eea;*/
+/*    -fx-font-weight: 600;*/
+/*}*/
+
+/*!* ==================== EMPTY STATE ==================== *!*/
+/*.empty-state {*/
+/*    -fx-background-color: white;*/
+/*    -fx-background-radius: 20;*/
+/*    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.08), 10, 0, 0, 4);*/
+/*}*/
+
+/*.create-first-trip-btn {*/
+/*    -fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);*/
+/*    -fx-text-fill: white;*/
+/*    -fx-font-size: 16px;*/
+/*    -fx-font-weight: bold;*/
+/*    -fx-padding: 16 35;*/
+/*    -fx-background-radius: 25;*/
+/*    -fx-cursor: hand;*/
+/*    -fx-effect: dropshadow(three-pass-box, rgba(102, 126, 234, 0.4), 10, 0, 0, 4);*/
+/*}*/
+
+/*.create-first-trip-btn:hover {*/
+/*    -fx-background-color: linear-gradient(135deg, #5568d3 0%, #653a8b 100%);*/
+/*    -fx-scale-x: 1.05;*/
+/*    -fx-scale-y: 1.05;*/
+/*}*/
+
+/*!* ==================== SEPARATORS ==================== *!*/
+/*.separator {*/
+/*    -fx-background-color: #e8ecf0;*/
+/*}*/
+
+/*!* ==================== SCROLL BAR STYLING ==================== *!*/
+/*.scroll-pane {*/
+/*    -fx-background-color: transparent;*/
+/*}*/
+
+/*.scroll-pane > .viewport {*/
+/*    -fx-background-color: transparent;*/
+/*}*/
+
+/*!* ==================== ANIMATIONS & TRANSITIONS ==================== *!*/
+/*.trip-card,*/
+/*.stat-card-enhanced,*/
+/*.quick-link-btn-modern,*/
+/*.notification-item-modern,*/
+/*.trending-destination-modern,*/
+/*.action-btn,*/
+/*.filter-btn {*/
+/*    -fx-transition: all 0.3s ease-in-out;*/
+/*}*/
+
+/*!* ==================== RESPONSIVE ADJUSTMENTS ==================== *!*/
+/*@media (max-width: 1280px) {*/
+/*    .sidebar-section-modern {*/
+/*        -fx-pref-width: 320;*/
+/*    }*/
+/*}*/
+
+/*@media (max-width: 1024px) {*/
+/*    .welcome-title-hero {*/
+/*        -fx-font-size: 32px;*/
+/*    }*/
+
+/*    .stat-card-enhanced {*/
+/*        -fx-padding: 25 15;*/
+/*    }*/
+/*}*/
+
+
 /* ==================== MODERN HOME PAGE STYLES ==================== */
 
-/* Smooth Scrolling */
+/* Smooth Scrolling with Enhanced Effects */
 .main-scroll-pane {
     -fx-background-color: transparent;
     -fx-background: transparent;
@@ -12,19 +672,27 @@
 
 .main-scroll-pane > .scroll-bar:vertical {
     -fx-background-color: transparent;
-    -fx-pref-width: 10px;
+    -fx-pref-width: 12px;
+    -fx-opacity: 0.7;
 }
 
 .main-scroll-pane > .scroll-bar:vertical > .thumb {
     -fx-background-color: linear-gradient(to bottom, #667eea, #764ba2);
-    -fx-background-radius: 5px;
+    -fx-background-radius: 6px;
     -fx-background-insets: 2;
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.4), 8, 0, 0, 2);
+}
+
+.main-scroll-pane > .scroll-bar:vertical > .thumb:hover {
+    -fx-background-color: linear-gradient(to bottom, #5568d3, #653a8b);
+    -fx-scale-x: 1.2;
 }
 
 .main-scroll-pane > .scroll-bar:vertical > .increment-button,
 .main-scroll-pane > .scroll-bar:vertical > .decrement-button {
     -fx-background-color: transparent;
     -fx-padding: 0;
+    -fx-opacity: 0;
 }
 
 /* ==================== MAIN LAYOUT ==================== */
@@ -36,11 +704,18 @@
     -fx-background-color: transparent;
 }
 
-/* ==================== HERO WELCOME BANNER ==================== */
+/* ==================== INTERACTIVE HERO WELCOME BANNER ==================== */
 .welcome-banner-hero {
-    -fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    /*-fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);*/
+    -fx-background-color: #667eea;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 15, 0, 0, 5);
     -fx-background-radius: 0 0 30 30;
+    -fx-cursor: hand;
+}
+
+.welcome-banner-hero:hover {
+    -fx-background-color: linear-gradient(135deg, #5568d3 0%, #653a8b 50%, #e082f7 100%);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 20, 0, 0, 8);
 }
 
 .hero-content {
@@ -60,13 +735,13 @@
     -fx-font-weight: 500;
 }
 
-/* ==================== ENHANCED STATS CARDS ==================== */
+/* ==================== ENHANCED INTERACTIVE STATS CARDS ==================== */
 .stats-container-enhanced {
     -fx-spacing: 25;
 }
 
 .stat-card-enhanced {
-    -fx-background-color: white;
+    -fx-background-color: #723DD4;
     -fx-background-radius: 20;
     -fx-padding: 30 20;
     -fx-spacing: 10;
@@ -74,17 +749,32 @@
     -fx-border-color: rgba(255, 255, 255, 0.3);
     -fx-border-width: 2;
     -fx-border-radius: 20;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 8, 0, 0, 3);
 }
 
 .stat-card-enhanced:hover {
     -fx-scale-x: 1.08;
     -fx-scale-y: 1.08;
     -fx-background-color: #ffffff;
+    -fx-effect: dropshadow(three-pass-box, rgba(102, 126, 234, 0.3), 15, 0, 0, 6);
+    -fx-border-color: #667eea;
+}
+
+.stat-card-enhanced:pressed {
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
 }
 
 .stat-icon-enhanced {
     -fx-font-size: 48px;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);
+    -fx-transition: all 0.3s ease;
+}
+
+.stat-card-enhanced:hover .stat-icon-enhanced {
+    -fx-rotate: 10;
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
 }
 
 .stat-number-enhanced {
@@ -104,11 +794,13 @@
     -fx-text-fill: #667eea;
     -fx-font-weight: 700;
     -fx-cursor: hand;
+    -fx-padding: 5 0 0 0;
 }
 
 .stat-action:hover {
     -fx-text-fill: #5568d3;
     -fx-underline: true;
+    -fx-translate-y: -1;
 }
 
 /* ==================== MODERN CREATE POST SECTION ==================== */
@@ -142,6 +834,7 @@
     -fx-padding: 16;
     -fx-font-size: 15px;
     -fx-text-fill: #2c3e50;
+    -fx-transition: all 0.3s ease;
 }
 
 .create-post-textarea-modern:focused {
@@ -149,6 +842,8 @@
     -fx-border-width: 2;
     -fx-background-color: white;
     -fx-effect: dropshadow(three-pass-box, rgba(102, 126, 234, 0.2), 10, 0, 0, 3);
+    -fx-scale-x: 1.01;
+    -fx-scale-y: 1.01;
 }
 
 .create-post-btn-modern {
@@ -160,12 +855,19 @@
     -fx-background-radius: 12;
     -fx-cursor: hand;
     -fx-effect: dropshadow(three-pass-box, rgba(102, 126, 234, 0.4), 8, 0, 0, 3);
+    -fx-transition: all 0.2s ease;
 }
 
 .create-post-btn-modern:hover {
     -fx-background-color: linear-gradient(135deg, #5568d3 0%, #653a8b 100%);
     -fx-scale-x: 1.03;
     -fx-scale-y: 1.03;
+    -fx-effect: dropshadow(three-pass-box, rgba(102, 126, 234, 0.6), 12, 0, 0, 5);
+}
+
+.create-post-btn-modern:pressed {
+    -fx-scale-x: 1.01;
+    -fx-scale-y: 1.01;
 }
 
 .secondary-btn-modern {
@@ -176,11 +878,13 @@
     -fx-padding: 14 24;
     -fx-background-radius: 12;
     -fx-cursor: hand;
+    -fx-transition: all 0.2s ease;
 }
 
 .secondary-btn-modern:hover {
     -fx-background-color: #e4e9f0;
     -fx-text-fill: #667eea;
+    -fx-translate-y: -1;
 }
 
 .icon-btn-modern {
@@ -191,15 +895,18 @@
     -fx-min-height: 44px;
     -fx-background-radius: 50%;
     -fx-cursor: hand;
+    -fx-transition: all 0.3s ease;
 }
 
 .icon-btn-modern:hover {
     -fx-background-color: #667eea;
     -fx-text-fill: white;
     -fx-rotate: 180;
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
 }
 
-/* ==================== MODERN FEED HEADER ==================== */
+/* ==================== INTERACTIVE FEED HEADER ==================== */
 .feed-header-modern {
     -fx-background-color: transparent;
     -fx-padding: 25 40 15 40;
@@ -216,7 +923,7 @@
     -fx-text-fill: #95a5a6;
 }
 
-/* Filter Buttons */
+/* Interactive Filter Buttons */
 .filter-btn {
     -fx-background-color: white;
     -fx-text-fill: #5a6c7d;
@@ -228,18 +935,26 @@
     -fx-border-color: #e0e4e9;
     -fx-border-width: 1;
     -fx-border-radius: 20;
+    -fx-transition: all 0.2s ease;
 }
 
 .filter-btn:hover {
     -fx-background-color: #f8f9fc;
     -fx-border-color: #667eea;
     -fx-text-fill: #667eea;
+    -fx-translate-y: -2;
 }
 
 .filter-active {
     -fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     -fx-text-fill: white;
     -fx-border-color: transparent;
+    -fx-effect: dropshadow(three-pass-box, rgba(102, 126, 234, 0.4), 8, 0, 0, 3);
+}
+
+.filter-active:hover {
+    -fx-background-color: linear-gradient(135deg, #5568d3 0%, #653a8b 100%);
+    -fx-translate-y: -2;
 }
 
 /* ==================== FEED CONTAINER ==================== */
@@ -247,7 +962,7 @@
     -fx-background-color: transparent;
 }
 
-/* ==================== ENHANCED TRIP CARDS ==================== */
+/* ==================== ENHANCED INTERACTIVE TRIP CARDS ==================== */
 .trip-card {
     -fx-background-color: white;
     -fx-background-radius: 20;
@@ -256,11 +971,18 @@
     -fx-border-color: rgba(230, 235, 240, 0.8);
     -fx-border-width: 1;
     -fx-border-radius: 20;
+    -fx-transition: all 0.3s ease;
 }
 
 .trip-card:hover {
     -fx-effect: dropshadow(three-pass-box, rgba(102, 126, 234, 0.3), 20, 0, 0, 8);
     -fx-translate-y: -5;
+    -fx-border-color: #667eea;
+}
+
+.trip-card:pressed {
+    -fx-translate-y: -2;
+    -fx-effect: dropshadow(three-pass-box, rgba(102, 126, 234, 0.2), 15, 0, 0, 6);
 }
 
 /* Card Header */
@@ -276,6 +998,13 @@
     -fx-alignment: center;
     -fx-background-radius: 50%;
     -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.4), 8, 0, 0, 2);
+    -fx-transition: all 0.3s ease;
+}
+
+.trip-card:hover .avatar-circle {
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-rotate: 5;
 }
 
 .post-author {
@@ -294,6 +1023,12 @@
     -fx-font-weight: bold;
     -fx-padding: 8 16;
     -fx-background-radius: 15;
+    -fx-transition: all 0.2s ease;
+}
+
+.trip-card:hover .trip-type-badge {
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
 }
 
 .group-badge {
@@ -320,6 +1055,12 @@
     -fx-border-color: #e8ecf0;
     -fx-border-width: 1;
     -fx-border-radius: 15;
+    -fx-transition: all 0.3s ease;
+}
+
+.trip-card:hover .trip-details-section {
+    -fx-background-color: white;
+    -fx-border-color: #667eea;
 }
 
 .trip-detail-title {
@@ -351,7 +1092,7 @@
     -fx-font-weight: 600;
 }
 
-/* Action Buttons */
+/* Interactive Action Buttons */
 .action-buttons {
     -fx-padding: 10 0 0 0;
 }
@@ -365,6 +1106,7 @@
     -fx-background-radius: 10;
     -fx-border-color: transparent;
     -fx-cursor: hand;
+    -fx-transition: all 0.2s ease;
 }
 
 .action-btn:hover {
@@ -372,6 +1114,7 @@
     -fx-text-fill: white;
     -fx-scale-x: 1.05;
     -fx-scale-y: 1.05;
+    -fx-translate-y: -2;
 }
 
 .action-btn-primary {
@@ -384,7 +1127,7 @@
     -fx-effect: dropshadow(three-pass-box, rgba(102, 126, 234, 0.4), 10, 0, 0, 4);
 }
 
-/* ==================== MODERN SIDEBAR ==================== */
+/* ==================== INTERACTIVE MODERN SIDEBAR ==================== */
 .sidebar-section-modern {
     -fx-background-color: #fafbfc;
 }
@@ -393,6 +1136,7 @@
     -fx-background-color: white;
     -fx-background-radius: 18;
     -fx-padding: 24;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 8, 0, 0, 2);
 }
 
 .sidebar-icon {
@@ -410,7 +1154,7 @@
     -fx-padding: 0.5;
 }
 
-/* Quick Links */
+/* Interactive Quick Links */
 .quick-link-btn-modern {
     -fx-background-color: #f8f9fc;
     -fx-text-fill: #5a6c7d;
@@ -421,6 +1165,7 @@
     -fx-alignment: CENTER_LEFT;
     -fx-cursor: hand;
     -fx-border-color: transparent;
+    -fx-transition: all 0.3s ease;
 }
 
 .quick-link-btn-modern:hover {
@@ -437,9 +1182,10 @@
 
 .quick-link-primary:hover {
     -fx-background-color: linear-gradient(135deg, #5568d3, #653a8b);
+    -fx-translate-x: 5;
 }
 
-/* Notifications */
+/* Interactive Notifications */
 .notification-badge {
     -fx-background-color: #ff4757;
     -fx-text-fill: white;
@@ -449,6 +1195,14 @@
     -fx-min-height: 24px;
     -fx-background-radius: 50%;
     -fx-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(255, 71, 87, 0.4), 5, 0, 0, 2);
+    -fx-transition: all 0.3s ease;
+}
+
+.quick-link-btn-modern:hover .notification-badge {
+    -fx-scale-x: 1.2;
+    -fx-scale-y: 1.2;
+    -fx-rotate: 15;
 }
 
 .notification-list-modern {
@@ -463,12 +1217,14 @@
     -fx-border-color: transparent;
     -fx-border-width: 1;
     -fx-border-radius: 12;
+    -fx-transition: all 0.3s ease;
 }
 
 .notification-item-modern:hover {
     -fx-background-color: white;
     -fx-border-color: #667eea;
     -fx-effect: dropshadow(three-pass-box, rgba(102, 126, 234, 0.15), 8, 0, 0, 2);
+    -fx-translate-x: 3;
 }
 
 .notification-icon-wrapper {
@@ -477,6 +1233,13 @@
     -fx-min-height: 40px;
     -fx-background-radius: 50%;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);
+    -fx-transition: all 0.3s ease;
+}
+
+.notification-item-modern:hover .notification-icon-wrapper {
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-rotate: 5;
 }
 
 .notif-icon-modern {
@@ -511,14 +1274,17 @@
     -fx-border-width: 1;
     -fx-border-radius: 8;
     -fx-background-radius: 8;
+    -fx-transition: all 0.2s ease;
 }
 
 .view-all-btn:hover {
     -fx-background-color: #667eea;
     -fx-text-fill: white;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
 }
 
-/* Trending Destinations */
+/* Interactive Trending Destinations */
 .trending-destination-modern {
     -fx-background-color: #f8f9fc;
     -fx-background-radius: 12;
@@ -527,6 +1293,7 @@
     -fx-border-color: transparent;
     -fx-border-width: 1;
     -fx-border-radius: 12;
+    -fx-transition: all 0.3s ease;
 }
 
 .trending-destination-modern:hover {
@@ -534,10 +1301,18 @@
     -fx-border-color: #667eea;
     -fx-effect: dropshadow(three-pass-box, rgba(102, 126, 234, 0.2), 10, 0, 0, 3);
     -fx-translate-x: 3;
+    -fx-translate-y: -2;
 }
 
 .destination-icon {
     -fx-font-size: 28px;
+    -fx-transition: all 0.3s ease;
+}
+
+.trending-destination-modern:hover .destination-icon {
+    -fx-scale-x: 1.2;
+    -fx-scale-y: 1.2;
+    -fx-rotate: -5;
 }
 
 .destination-name {
@@ -553,6 +1328,12 @@
 
 .trending-icon {
     -fx-font-size: 20px;
+    -fx-transition: all 0.3s ease;
+}
+
+.trending-destination-modern:hover .trending-icon {
+    -fx-scale-x: 1.3;
+    -fx-scale-y: 1.3;
 }
 
 .explore-btn {
@@ -563,19 +1344,30 @@
     -fx-padding: 12;
     -fx-cursor: hand;
     -fx-background-radius: 10;
+    -fx-transition: all 0.2s ease;
 }
 
 .explore-btn:hover {
     -fx-background-color: #667eea;
     -fx-text-fill: white;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
 }
 
-/* Travel Tips Card */
+/* Interactive Travel Tips Card */
 .tips-card {
     -fx-background-color: linear-gradient(135deg, #ffeef8 0%, #f3e7ff 100%);
     -fx-border-color: rgba(102, 126, 234, 0.2);
     -fx-border-width: 1;
     -fx-border-radius: 18;
+    -fx-cursor: hand;
+    -fx-transition: all 0.3s ease;
+}
+
+.tips-card:hover {
+    -fx-border-color: rgba(102, 126, 234, 0.5);
+    -fx-effect: dropshadow(three-pass-box, rgba(102, 126, 234, 0.15), 10, 0, 0, 3);
+    -fx-translate-y: -3;
 }
 
 .tip-content {
@@ -591,7 +1383,7 @@
     -fx-font-weight: 600;
 }
 
-/* ==================== EMPTY STATE ==================== */
+/* ==================== INTERACTIVE EMPTY STATE ==================== */
 .empty-state {
     -fx-background-color: white;
     -fx-background-radius: 20;
@@ -607,12 +1399,19 @@
     -fx-background-radius: 25;
     -fx-cursor: hand;
     -fx-effect: dropshadow(three-pass-box, rgba(102, 126, 234, 0.4), 10, 0, 0, 4);
+    -fx-transition: all 0.3s ease;
 }
 
 .create-first-trip-btn:hover {
     -fx-background-color: linear-gradient(135deg, #5568d3 0%, #653a8b 100%);
     -fx-scale-x: 1.05;
     -fx-scale-y: 1.05;
+    -fx-effect: dropshadow(three-pass-box, rgba(102, 126, 234, 0.6), 15, 0, 0, 6);
+}
+
+.create-first-trip-btn:pressed {
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
 }
 
 /* ==================== SEPARATORS ==================== */
@@ -620,7 +1419,7 @@
     -fx-background-color: #e8ecf0;
 }
 
-/* ==================== SCROLL BAR STYLING ==================== */
+/* ==================== ENHANCED SCROLL BAR STYLING ==================== */
 .scroll-pane {
     -fx-background-color: transparent;
 }
@@ -629,15 +1428,38 @@
     -fx-background-color: transparent;
 }
 
-/* ==================== ANIMATIONS & TRANSITIONS ==================== */
+/* ==================== ADVANCED ANIMATIONS & TRANSITIONS ==================== */
 .trip-card,
 .stat-card-enhanced,
 .quick-link-btn-modern,
 .notification-item-modern,
 .trending-destination-modern,
 .action-btn,
-.filter-btn {
-    -fx-transition: all 0.3s ease-in-out;
+.filter-btn,
+.create-post-btn-modern {
+    -fx-transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Pulse animation for important elements */
+@keyframes pulse {
+    0% { -fx-scale-x: 1; -fx-scale-y: 1; }
+    50% { -fx-scale-x: 1.05; -fx-scale-y: 1.05; }
+    100% { -fx-scale-x: 1; -fx-scale-y: 1; }
+}
+
+.pulse-animation {
+    -fx-animation: pulse 2s infinite;
+}
+
+/* Shake animation for notifications */
+@keyframes shake {
+    0%, 100% { -fx-translate-x: 0; }
+    25% { -fx-translate-x: -2; }
+    75% { -fx-translate-x: 2; }
+}
+
+.shake-animation {
+    -fx-animation: shake 0.5s ease-in-out;
 }
 
 /* ==================== RESPONSIVE ADJUSTMENTS ==================== */
@@ -654,5 +1476,30 @@
 
     .stat-card-enhanced {
         -fx-padding: 25 15;
+    }
+}
+
+/* ==================== ACCESSIBILITY & FOCUS STATES ==================== */
+.trip-card:focused,
+.stat-card-enhanced:focused,
+.filter-btn:focused {
+    -fx-effect: dropshadow(three-pass-box, rgba(102, 126, 234, 0.6), 15, 0, 0, 0);
+    -fx-border-color: #667eea;
+    -fx-border-width: 2;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .trip-card,
+    .stat-card-enhanced,
+    .sidebar-card-modern {
+        -fx-border-color: #2c3e50;
+        -fx-border-width: 2;
+    }
+
+    .action-btn-primary,
+    .create-post-btn-modern,
+    .filter-active {
+        -fx-background-color: #2c3e50;
     }
 }
