@@ -1,0 +1,313 @@
+/* Messenger Styles - Enhanced & Interactive */
+.root {
+    -fx-font-family: 'Segoe UI', 'System', sans-serif;
+    -fx-background-color: #f8fafc;
+}
+
+.header-box {
+    -fx-background-color: white;
+    -fx-border-color: #e5e7eb;
+    -fx-border-width: 0 0 2 0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0, 0, 2);
+    -fx-padding: 20;
+}
+
+.room-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: 800;
+    -fx-text-fill: #1f2937;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 3, 0, 1, 1);
+}
+
+.status-active {
+    -fx-font-size: 12px;
+    -fx-text-fill: #065f46;
+    -fx-background-color: linear-gradient(135deg, #d1fae5, #a7f3d0);
+    -fx-background-radius: 15;
+    -fx-padding: 6 12 6 12;
+    -fx-font-weight: 700;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 3, 0, 1, 1);
+}
+
+.member-count-header {
+    -fx-font-size: 13px;
+    -fx-text-fill: #6b7280;
+    -fx-font-weight: 600;
+}
+
+.room-description {
+    -fx-font-size: 14px;
+    -fx-text-fill: #6b7280;
+    -fx-font-style: italic;
+    -fx-font-weight: 500;
+}
+
+.timestamp, .auto-delete {
+    -fx-font-size: 12px;
+    -fx-text-fill: #9ca3af;
+    -fx-font-weight: 500;
+}
+
+/* Chat Area Styles */
+.chat-scroll-pane {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 10;
+}
+
+.chat-scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.chat-container {
+    -fx-background-color: transparent;
+}
+
+.message-separator {
+    -fx-padding: 10 0 10 0;
+    -fx-background-color: #e5e7eb;
+}
+
+.message-bubble {
+    -fx-background-color: white;
+    -fx-background-radius: 18;
+    -fx-padding: 16 20 16 20;
+    -fx-border-radius: 18;
+    -fx-border-color: #e5e7eb;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0, 2, 2);
+}
+
+.message-bubble:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 12, 0, 3, 3);
+    -fx-scale-x: 1.01;
+    -fx-scale-y: 1.01;
+}
+
+.admin-message {
+    -fx-background-color: #e0f2fe;
+    -fx-border-color: #7dd3fc;
+}
+
+.my-message {
+    -fx-background-color: #dcfce7;
+    -fx-border-color: #86efac;
+}
+
+.sender-name {
+    -fx-font-size: 13px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #374151;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 1, 0, 1, 1);
+}
+
+.admin-name {
+    -fx-text-fill: #1d4ed8;
+}
+
+.my-name {
+    -fx-text-fill: #065f46;
+}
+
+.message-time {
+    -fx-font-size: 11px;
+    -fx-text-fill: #9ca3af;
+    -fx-font-weight: 500;
+}
+
+.message-text {
+    -fx-font-size: 14px;
+    -fx-text-fill: #1f2937;
+    -fx-wrap-text: true;
+    -fx-font-weight: 500;
+    -fx-line-spacing: 1.4;
+}
+
+.file-attachment {
+    -fx-background-color: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+    -fx-background-radius: 10;
+    -fx-padding: 10 14 10 14;
+    -fx-border-radius: 10;
+    -fx-border-color: #e5e7eb;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 5, 0, 1, 1);
+    -fx-cursor: hand;
+    -fx-transition: all 0.3s ease;
+}
+
+.file-attachment:hover {
+    -fx-background-color: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0, 2, 2);
+}
+
+.file-name {
+    -fx-font-size: 12px;
+    -fx-text-fill: #2563eb;
+    -fx-font-style: italic;
+    -fx-font-weight: 600;
+}
+
+.file-icon {
+    -fx-font-size: 16px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 2, 0, 1, 1);
+}
+
+/* Participants Panel */
+.participants-panel {
+    -fx-background-color: #f8fafc;
+    -fx-border-color: #e5e7eb;
+    -fx-border-width: 0 0 0 2;
+    -fx-pref-width: 240;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 2, 0);
+}
+
+.participants-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #1f2937;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 2, 0, 1, 1);
+}
+
+.section-title {
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #4b5563;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 1, 0, 1, 1);
+}
+
+.member-name {
+    -fx-font-size: 13px;
+    -fx-text-fill: #374151;
+    -fx-font-weight: 500;
+}
+
+.status-online {
+    -fx-font-size: 11px;
+    -fx-text-fill: #065f46;
+    -fx-background-color: linear-gradient(135deg, #d1fae5, #a7f3d0);
+    -fx-background-radius: 12;
+    -fx-padding: 4 10 4 10;
+    -fx-font-weight: 700;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 2, 0, 1, 1);
+}
+
+.status-away {
+    -fx-font-size: 11px;
+    -fx-text-fill: #92400e;
+    -fx-background-color: linear-gradient(135deg, #fef3c7, #fde68a);
+    -fx-background-radius: 12;
+    -fx-padding: 4 10 4 10;
+    -fx-font-weight: 700;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 2, 0, 1, 1);
+}
+
+.file-item {
+    -fx-padding: 6 0 6 0;
+    -fx-cursor: hand;
+    -fx-transition: all 0.2s ease;
+}
+
+.file-item:hover {
+    -fx-background-color: #f3f4f6;
+    -fx-background-radius: 8;
+    -fx-padding: 6 8 6 8;
+}
+
+.file-list-name {
+    -fx-font-size: 12px;
+    -fx-text-fill: #6b7280;
+    -fx-font-weight: 500;
+}
+
+/* Input Area */
+
+.input-container {
+    -fx-background-color: white;
+    -fx-border-color: #e5e7eb;
+    -fx-border-width: 2 0 0 0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, -2);
+}
+
+.message-input {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #d1d5db;
+    -fx-border-radius: 25;
+    -fx-background-radius: 25;
+    -fx-padding: 14 20 14 20;
+    -fx-font-size: 14px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0, 2, 2);
+    -fx-transition: all 0.3s ease;
+}
+
+.message-input:focused {
+    -fx-border-color: #3b82f6;
+    -fx-effect: dropshadow(gaussian, rgba(59, 130, 246, 0.3), 12, 0, 0, 4);
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+
+.send-button {
+    -fx-background-color: linear-gradient(to right, #059669, #047857);
+    -fx-text-fill: white;
+    -fx-background-radius: 20;
+    -fx-padding: 12 24 12 24;
+    -fx-font-size: 14px;
+    -fx-font-weight: 700;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(5, 150, 105, 0.4), 8, 0, 2, 2);
+    -fx-transition: all 0.3s ease;
+}
+
+.send-button:hover {
+    -fx-background-color: linear-gradient(to right, #10b981, #059669);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-effect: dropshadow(gaussian, rgba(5, 150, 105, 0.6), 12, 0, 3, 3);
+}
+
+.file-button {
+    -fx-background-color: linear-gradient(to right, #6b7280, #4b5563);
+    -fx-text-fill: white;
+    -fx-background-radius: 20;
+    -fx-padding: 12 16 12 16;
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 6, 0, 2, 2);
+    -fx-transition: all 0.3s ease;
+}
+
+.file-button:hover {
+    -fx-background-color: linear-gradient(to right, #4b5563, #374151);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0, 3, 3);
+}
+
+.system-message {
+    -fx-font-size: 13px;
+    -fx-text-fill: #6b7280;
+    -fx-font-style: italic;
+    -fx-font-weight: 500;
+    -fx-alignment: CENTER;
+    -fx-padding: 10 0 10 0;
+}
+
+.back-button {
+    -fx-background-color: linear-gradient(to right, #6b7280, #4b5563);
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+    -fx-background-radius: 8;
+    -fx-padding: 8 16 8 16;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 6, 0, 2, 2);
+    -fx-transition: all 0.3s ease;
+}
+
+.back-button:hover {
+    -fx-background-color: linear-gradient(to right, #4b5563, #374151);
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0, 3, 3);
+}

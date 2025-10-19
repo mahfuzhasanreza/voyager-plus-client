@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.voyeger.MessengerController"
+            stylesheets="@messenger_styles.css"
+            prefWidth="800" prefHeight="600">
+
+    <!-- Top Header -->
+    <top>
+        <HBox styleClass="header-box" spacing="10" alignment="CENTER_LEFT">
+            <padding><Insets top="10" right="15" bottom="10" left="15" /></padding>
+
+            <!-- Back Button -->
+            <Button fx:id="backButton" text="← Back to Dashboard" styleClass="back-button" />
+
+            <VBox spacing="5" HBox.hgrow="ALWAYS">
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <Label text="Operation Sunrise" styleClass="room-title" />
+                    <Label text="active" styleClass="status-active" />
+                    <Label text="4 members" styleClass="member-count-header" />
+                </HBox>
+                <Label text="Room created. Mission briefing will start in 5 minutes." styleClass="room-description" />
+            </VBox>
+        </HBox>
+    </top>
+
+    <!-- Center - Chat Messages -->
+    <center>
+        <ScrollPane fx:id="chatScrollPane" styleClass="chat-scroll-pane" fitToWidth="true">
+            <VBox fx:id="chatContainer" spacing="10" styleClass="chat-container">
+                <padding><Insets top="10" right="15" bottom="10" left="15" /></padding>
+
+                <!-- System Message -->
+                <HBox alignment="CENTER_LEFT" spacing="5">
+                    <Separator styleClass="message-separator" HBox.hgrow="ALWAYS" />
+                </HBox>
+
+                <!-- Officer Khan Message -->
+                <VBox styleClass="message-bubble">
+                    <HBox spacing="5">
+                        <Label text="Officer Khan" styleClass="sender-name" />
+                        <Label text="00:22" styleClass="message-time" />
+                    </HBox>
+                    <Label text="Roger that. Awaiting instructions." styleClass="message-text" />
+                </VBox>
+
+                <!-- Admin Message with File -->
+                <VBox styleClass="message-bubble admin-message">
+                    <HBox spacing="5">
+                        <Label text="Admin" styleClass="sender-name admin-name" />
+                        <Label text="00:23" styleClass="message-time" />
+                    </HBox>
+                    <Label text="Evidence photos uploaded." styleClass="message-text" />
+                    <HBox spacing="5" styleClass="file-attachment">
+                        <ImageView fx:id="fileIcon" fitWidth="16" fitHeight="16" />
+                        <Label text="evidence_001.jpg" styleClass="file-name" />
+                    </HBox>
+                </VBox>
+
+                <!-- Separator -->
+                <HBox alignment="CENTER_LEFT" spacing="5">
+                    <Separator styleClass="message-separator" HBox.hgrow="ALWAYS" />
+                </HBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+
+    <!-- Right - Participants Panel -->
+    <right>
+        <VBox styleClass="participants-panel" spacing="10">
+            <padding><Insets top="15" right="15" bottom="15" left="15" /></padding>
+
+            <Label text="Participants" styleClass="participants-title" />
+
+            <VBox spacing="15">
+                <!-- Files Section -->
+                <VBox spacing="5">
+                    <Label text="Files" styleClass="section-title" />
+                    <HBox spacing="5" styleClass="file-item">
+                        <ImageView fitWidth="12" fitHeight="12" />
+                        <Label text="evidence_001.jpg" styleClass="file-list-name" />
+                    </HBox>
+                </VBox>
+
+                <!-- Room Members Section -->
+                <VBox spacing="5">
+                    <Label text="Room Members" styleClass="section-title" />
+
+                    <VBox spacing="8">
+                        <HBox spacing="5" alignment="CENTER_LEFT">
+                            <Label text="Officer Rahman" styleClass="member-name" />
+                            <Label text="Online" styleClass="status-online" />
+                        </HBox>
+                        <HBox spacing="5" alignment="CENTER_LEFT">
+                            <Label text="Officer Khan" styleClass="member-name" />
+                            <Label text="Online" styleClass="status-online" />
+                        </HBox>
+                        <HBox spacing="5" alignment="CENTER_LEFT">
+                            <Label text="Officer Ali" styleClass="member-name" />
+                            <Label text="Away" styleClass="status-away" />
+                        </HBox>
+                        <HBox spacing="5" alignment="CENTER_LEFT">
+                            <Label text="Admin" styleClass="member-name" />
+                            <Label text="Online" styleClass="status-online" />
+                        </HBox>
+                    </VBox>
+                </VBox>
+            </VBox>
+        </VBox>
+    </right>
+
+    <!-- Bottom - Message Input -->
+    <bottom>
+        <VBox spacing="5" styleClass="input-container">
+            <padding><Insets top="10" right="15" bottom="10" left="15" /></padding>
+            <Separator />
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <TextField fx:id="messageInput" styleClass="message-input" promptText="Type your message..." HBox.hgrow="ALWAYS" />
+                <Button fx:id="sendButton" text="Send" styleClass="send-button" onAction="#sendMessage" />
+                <Button fx:id="fileButton" text="📎" styleClass="file-button" onAction="#attachFile" />
+            </HBox>
+        </VBox>
+    </bottom>
+</BorderPane>
