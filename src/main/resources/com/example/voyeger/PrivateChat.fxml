@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.voyeger.PrivateChatController"
+            styleClass="root" stylesheets="@PrivateChat.css">
+
+    <!-- Top: Header -->
+    <top>
+        <HBox styleClass="header" alignment="CENTER_LEFT" spacing="15">
+            <padding>
+                <Insets top="15" right="20" bottom="15" left="20"/>
+            </padding>
+
+            <Button text="← Back" onAction="#handleBack" styleClass="back-btn"/>
+
+            <Label text="💬 Voyager+ Chat" styleClass="header-title">
+                <font>
+                    <Font name="System Bold" size="24"/>
+                </font>
+            </Label>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Label fx:id="connectionStatusLabel" text="● Connecting..." styleClass="status-label">
+                <font>
+                    <Font size="12"/>
+                </font>
+            </Label>
+        </HBox>
+    </top>
+
+    <!-- Center: Split view - User list on left, Chat interface on right -->
+    <center>
+        <SplitPane dividerPositions="0.3" styleClass="main-split">
+
+            <!-- Left: User List -->
+            <VBox styleClass="user-list-container">
+                <padding>
+                    <Insets top="20" right="15" bottom="20" left="15"/>
+                </padding>
+
+                <HBox alignment="CENTER_LEFT" spacing="10" styleClass="section-header">
+                    <Label text="Online Users" styleClass="section-title">
+                        <font>
+                            <Font name="System Bold" size="18"/>
+                        </font>
+                    </Label>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button fx:id="refreshButton" text="🔄" onAction="#handleRefresh"
+                            styleClass="refresh-btn">
+                        <tooltip>
+                            <Tooltip text="Refresh users"/>
+                        </tooltip>
+                    </Button>
+                </HBox>
+
+                <Separator styleClass="header-separator">
+                    <VBox.margin>
+                        <Insets top="10" bottom="10"/>
+                    </VBox.margin>
+                </Separator>
+
+                <!-- Search box -->
+                <TextField fx:id="searchField" promptText="🔍 Search users..."
+                          styleClass="search-field">
+                    <VBox.margin>
+                        <Insets bottom="15"/>
+                    </VBox.margin>
+                </TextField>
+
+                <!-- User List -->
+                <ListView fx:id="userListView" styleClass="user-list" VBox.vgrow="ALWAYS">
+                    <placeholder>
+                        <VBox alignment="CENTER" spacing="10" style="-fx-padding: 20;">
+                            <Label text="😔" style="-fx-font-size: 48;"/>
+                            <Label text="No users online" style="-fx-text-fill: #b0b3b8; -fx-font-size: 14;"/>
+                        </VBox>
+                    </placeholder>
+                </ListView>
+            </VBox>
+
+            <!-- Right: Chat Interface -->
+            <StackPane>
+                <!-- Empty state (shown when no chat is selected) -->
+                <VBox fx:id="emptyChatState" alignment="CENTER" spacing="15" styleClass="empty-state">
+                    <Label text="💬" style="-fx-font-size: 64;"/>
+                    <Label text="Select a user to start chatting" styleClass="empty-state-text">
+                        <font>
+                            <Font size="16"/>
+                        </font>
+                    </Label>
+                </VBox>
+
+                <!-- Active chat (shown when a chat is selected) -->
+                <BorderPane fx:id="activeChatPane" visible="false" styleClass="chat-pane">
+
+                    <!-- Chat Header -->
+                    <top>
+                        <HBox alignment="CENTER_LEFT" spacing="10" styleClass="chat-header">
+                            <padding>
+                                <Insets top="15" right="20" bottom="15" left="20"/>
+                            </padding>
+
+                            <!-- User Avatar/Initial -->
+                            <Label text="👤" styleClass="user-avatar">
+                                <font>
+                                    <Font size="24"/>
+                                </font>
+                            </Label>
+
+                            <VBox spacing="2">
+                                <Label fx:id="chatUserLabel" text="Username" styleClass="chat-user-name">
+                                    <font>
+                                        <Font name="System Bold" size="16"/>
+                                    </font>
+                                </Label>
+                                <Label text="Online" styleClass="chat-user-status">
+                                    <font>
+                                        <Font size="11"/>
+                                    </font>
+                                </Label>
+                            </VBox>
+                        </HBox>
+                    </top>
+
+                    <!-- Messages Area -->
+                    <center>
+                        <ScrollPane fx:id="messagesScrollPane"
+                                  fitToWidth="true"
+                                  styleClass="messages-scroll"
+                                  vbarPolicy="AS_NEEDED"
+                                  hbarPolicy="NEVER">
+                            <VBox fx:id="messagesContainer"
+                                  spacing="5"
+                                  styleClass="messages-container">
+                                <padding>
+                                    <Insets top="15" right="10" bottom="15" left="10"/>
+                                </padding>
+                            </VBox>
+                        </ScrollPane>
+                    </center>
+
+                    <!-- Message Input Area -->
+                    <bottom>
+                        <HBox spacing="10" alignment="CENTER" styleClass="input-area">
+                            <padding>
+                                <Insets top="15" right="20" bottom="15" left="20"/>
+                            </padding>
+
+                            <TextField fx:id="messageInput"
+                                     promptText="Type a message..."
+                                     styleClass="message-input"
+                                     HBox.hgrow="ALWAYS">
+                                <font>
+                                    <Font size="14"/>
+                                </font>
+                            </TextField>
+
+                            <Button fx:id="sendButton"
+                                  text="Send"
+                                  onAction="#handleSendMessage"
+                                  styleClass="send-btn"
+                                  defaultButton="true">
+                                <font>
+                                    <Font name="System Bold" size="14"/>
+                                </font>
+                            </Button>
+                        </HBox>
+                    </bottom>
+                </BorderPane>
+            </StackPane>
+
+        </SplitPane>
+    </center>
+</BorderPane>

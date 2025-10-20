@@ -8,7 +8,8 @@ import javafx.stage.Stage;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("messenger_room.fxml"));
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("PrivateChat.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Welcome.fxml"));
         Scene scene = new Scene(loader.load(), 1400, 800);
         stage.setTitle("Voyager+ - Welcome");
         stage.setScene(scene);

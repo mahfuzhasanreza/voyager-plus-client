@@ -17,7 +17,7 @@ public class NavbarController {
     private Label brandLabel;
 
     @FXML
-    private Button homeBtn, profileBtn;
+    private Button homeBtn, profileBtn, privateChatBtn;
 
     @FXML
     private Label notificationBadge;
@@ -82,6 +82,11 @@ public class NavbarController {
     @FXML
     private void handleHome(ActionEvent event) {
         navigateToPage("NewsFeed.fxml", "Home - Voyager+", "home");
+    }
+
+    @FXML
+    private void handlePrivateChat(ActionEvent event) {
+        navigateToPage("PrivateChat.fxml", "Private Chat - Voyager+", "chat");
     }
 
     @FXML

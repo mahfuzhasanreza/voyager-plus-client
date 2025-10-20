@@ -30,6 +30,9 @@
         <!-- Home -->
         <Button fx:id="homeBtn" text="🏠 Home" onAction="#handleHome" styleClass="nav-btn"/>
 
+        <!-- Private Chat Button -->
+        <Button fx:id="privateChatBtn" text="💬 Chat" onAction="#handlePrivateChat" styleClass="nav-btn"/>
+
         <!-- Notifications Button with Badge -->
         <StackPane>
             <Button text="🔔" onAction="#handleNotifications" styleClass="nav-btn"
